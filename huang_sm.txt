@@ -1,0 +1,1356 @@
+                               Supplementary Materials for
+
+        Size, distribution, and vulnerability of the global soil inorganic carbon
+
+                                          Yuanyuan Huang et al.
+
+    Corresponding authors: Yuanyuan Huang, yuanyuanuang2011@gmail.com; Gan-Lin Zhang, glzhang@issas.ac.cn
+
+                                          Science 384, 233 (2024)
+                                        DOI: 10.1126/science.adi7918
+
+The PDF file includes:
+
+      Materials and Methods
+      Supplementary Text
+      Figs. S1 to S21
+      Tables S1 to S12
+      References
+Materials and Methods
+Soil carbonate system. SIC exists in soils in various forms, including gaseous carbon dioxide,
+dissolved inorganic carbons (CO2, H2CO3, HCO-3 and CO2-3) and solid carbonates (primarily calcium
+carbonate, CaCO3). Solid carbonates are the predominant component by weight, and we refer to SIC
+as solid carbonates when quantifying soil carbon stocks. Solid carbonates can be further categorized
+into geogenic or lithogenic carbonates inherited from calcareous soil parent material (such as
+limestone) and pedogenic carbonates formed through dissolution-precipitation of existing carbonates
+or precipitation of Ca2+ from silicate weathering. The dissolved inorganic carbon (DIC) contributes
+only a small portion of total SIC, but is closely coupled with the partial CO2 pressure (pCO2) of the
+soil atmosphere to determine the persistence (dissolution vs. precipitation) of solid carbonate through
+the following two chemical equations:
+                 H2O + CO2 (g) ↔ H2CO3 (aq) ↔ HCO3‾ (aq) + H+                       (S1)
+                CaCO3 (s)+ H+ ↔ HCO3‾ (aq) + Ca2+ (aq)                              (S2)
+Measurement data collection and standardization. Following the convention, we quantify SIC as
+12% of the calcium carbonate equivalent in fine earth (i.e., particle size ≤ 2 mm) (51), in which non-
+calcium (e.g., magnesium) carbonate is included. Site-level measurements (roughly from 1980 to
+2020) were collected from the ISRIC World Soil Information Service (WoSIS) with standardised soil
+profile data, covering sample locations, soil depths, soil inorganic carbon, soil organic carbon, soil
+texture, bulk density, soil pH, volumetric coarse fractions, cation exchange capacity and other soil
+properties(51). WoSIS profile data were supplemented by additional databases from National Soil
+Surveys, resamplings and new measurements from China(4, 52), from literature via “China National
+Knowledge Infrastructure” (https://www.cnki.net/) and “Web of Science”
+(http://www.isiknowledge.com/), from additional samples collected in South-West Germany (53),
+Egypt(54) and Russia. Details of the database and processes of data standardization are given in
+Supplementary Text.
+Acquisition and preprocessing of spatial data. To develop predictive models, we selected
+geospatial covariates based on their relevance to processes that affect SIC dynamics through
+reviewing existing studies(17, 41, 55). We targeted on integrating prior knowledge gained from
+multiple mechanistic and experimental studies on predictors of SIC storages. We combine
+observations with existing (“prior”) knowledge to “constrain” the predictor-response relationships,
+which form the basis to predict SIC under different conditions. We therefore did not apply methods
+such as recursive feature elimination to optimize feature selections based purely on the overall
+numerical information from data, to avoid excluding potential predictors especially when
+interpretating patterns at the regional scale. We selected factors reflecting soil properties (soil pH,
+nutrient contents/additions, soil erosion, cation exchange capacity, soil texture, coarse fragments, bulk
+density, electrical conductivity, soil organic carbon and water table depth) together with five major
+factors contributing to soil formation processes and therefore SIC storage, including parent material,
+topography, living organisms, climate and hydrology (Table S2). These covariates were derived
+through ground-based stations, satellite-based remote sensing, atmospheric and hydrological
+reanalysis, soil and lithological maps and the digital elevation model. Considering the clear pattern of
+observed SIC with soil depth and its role in driving soils’ diffusion capacity, we also included the
+upper and lower soil depths as covariates.
+         Topographic covariates including elevation, topographic wetness index (TWI), plan
+curvature, profile curvature, relative slope position, convergence index and slope, were generated
+from Multi-Error-Removed Improved-Terrain DEM. TWI that quantifies topographic controls on
+hydrological processes was obtained from ref (56), while others were derived with SAGA GIS (Table
+S2). Landform classes were obtained from the USGS global ecosystem map. Biological covariates
+included gross primary productivity, net primary productivity, soil respiration, maximum rooting
+depth and monthly maximum leaf area index. We grouped ESA-CCI land cover(57) into bare land,
+agricultural lands, grassland and tree-dominated (tree and shrub) pixels. Climatic and hydrological
+covariates included annual mean temperature, annual precipitation, different variations of temperature
+and precipitation, the aridity index, reference (potential) evapotranspiration, wind speed, soil
+temperature, soil water, runoff, water table depth, actual evapotranspiration, climate water deficit,
+downward surface shortwave radiation, vapor pressure and the Palmer drought severity index. We
+used the USGS global ecosystem map to represent parent materials. Detailed information about these
+covariates is provided in Table S2.
+         We preprocessed all spatial covariates and resampled to match the target resolution used
+during analysis (nominal 1-km2 pixels), and spatially cohered using the nearest neighbour resampling
+where necessary. For soil covariates that are associated with depth, we standardized values of
+corresponding variables at depths of 0-30cm, 30-100cm and 100-200cm by calculating the weighted
+averages if there are multiple depth intervals (e.g., 0-5cm, 5-10cm, 10-30cm for 0-30cm) within each
+of our three standard depths according to the trapezoidal rule(58) when necessary.
+Training, validation and statistical analysis. From the observation database, a large proportion of
+the measured SIC values were zero (Fig. 1), and this could lead to fitted models with predictions
+biased toward the zero. We therefore took two steps similarly as the two-part models in statistics(59).
+First, we decomposed each training dataset into two classes: no SIC (SIC = 0, N=94,945) and with the
+presence of SIC (SIC > 0, N=128,648). Then, a binary classification algorithm was trained to estimate
+the occurrence probability of each class to determine whether the target had SIC different from zero
+or not. In the next step, the regression model was built upon data with the presence of SIC to predict
+the magnitude of SIC content.
+         Tenfold cross-validation was used to estimate the performance of fitted models. Area under
+the receiver operating characteristic curve (AUC) was used to measure the ability of a classifier to
+distinguish between classes. The higher AUC indicates the better performance of the classification
+model. In addition to AUC, misclassification accuracy, precision, recall and F1-score (the harmonic
+mean of precision and recall) metrics were also calculated for the fitted classifier models (Table S3).
+For regression predictions, root-mean-squared error (RMSE) and R-squared (R2) were estimated.
+         The trained classifier with the highest AUC and F1-score and the regression model with the
+smallest RMSE and highest R-squared were selected for the rest of the analysis. With a combination
+of hyperparameter tuning, gradient boosting outperformed extreme gradient boosting and random
+forest methods for the classification and regression tasks (Table S3). The selected models showed
+similar performance for predicting SIC in both surface and subsurface layers (Fig. S20).
+Global prediction and SIC budgets. The classification and regression models selected above were
+applied to predict SIC content for 3 soil layers (0-0.3m, 0.3-1m and 1-2m) individually at the nominal
+1-km2 resolution. The top 2m SIC stock of each pixel was estimated as,
+       𝑆𝐼𝐶 (𝑘𝑔 𝑚−2 ) = ∑3𝑖=1 𝑆𝐼𝐶𝑖 (𝑘𝑔 𝑚−2 ) × 𝐵𝐷𝑖 (𝑘𝑔 𝑚−3 ) × 𝐷𝑖 (𝑚) × (1 − 𝐶𝐹𝑉𝑂𝑖 )               (S3)
+where 𝐵𝐷𝑖 is the bulk density in each soil layer, 𝐷𝑖 is the actual thickness of the estimated soil layer,
+and 𝐶𝐹𝑉𝑂𝑖 is the volumetric fraction of coarse fragments. For pixels with shallow soils, 𝐷𝑖 is inferred
+from the depth to bedrock. To estimate country-level budgets, country borders are based on TM
+World Borders Dataset 0.3. For the budgets, we estimated the uncertainties combing modelling
+uncertainty through repeated training of the models in 10-fold cross-validation and uncertainties in
+𝐵𝐷, 𝐷 and 𝐶𝐹𝑉𝑂 (58).
+Future scenarios and soil pH. Multiple sources contribute to changing soil pH status. Here we
+focused on nitrogen additions and physical climate changes as they are the top two most important
+drivers considering the magnitude and extent of their influence on soil pH globally(25, 60). We did
+not quantify, for example, the impact of cation uptake by plants, the shift of biological nitrogen
+fixation, sulfur deposition and liming on future soil pH changes due to large uncertainties in their
+roles in regulating soil pH under heterogeneous soil environment, limited availability of global
+datasets for their future projections, or their relatively smaller impact at the global scale. The impact
+of rising atmospheric CO2 levels on oceanic pH and carbon dynamics is well-documented(61).
+However, the effects of elevated atmospheric CO2 on soil pH are more complex and depend on
+multiple factors, including soil-air connectivity and biological CO2 generation or consumption. As a
+result, predicting the effects of higher atmospheric CO2 on soil pH accurately is challenging, and this
+study does not assess these effects.
+         We provide a range of soil pH estimates driven by future climate changes under three Shared
+Socioeconomic Pathways (SSPs), with greenhouse gas emission scenarios from low to high: SSP1-2.6
+(low-emission), SSP2-4.5 (intermediate-emission) and SSP5-8.5 (high-emission). We emphasize
+estimates from SSP5-8.5, because the recent, historical global warming trajectory aligns closely with
+SSP5-8.5(62) and to demonstrate the largest impact from unmitigated emissions.
+         Climate-driven pH changes by the end of this century (Fig. S15) were obtained from
+predictions of the XGBoost regression model (R-squared of 0.85; 10-fold cross-validation), which
+was built upon 181,955 soil pH measurements to link the spatial variations of soil pH to climatic
+(mean annual precipitation, reference evapotranspiration and mean annual temperature), edaphic,
+topographic and other environmental variables. The XGBoost regression model predicted soil pH
+under future climate assuming edaphic and topographic factors remain relatively unchanged. Mean
+annual precipitation and reference evapotranspiration ranked as the top two most important predictors.
+The primary role of hydrology in predicting soil pH, revealed by the XGBoost regression, is well-
+supported by ref (25) that attributes the global pattern of soil pH to water-balance. Changes in soil pH
+were quantified as the difference of soil pH by the end of this century (average climate conditions,
+2091-2100) compared to the present-day (2015-2024).
+         Future (by 2100) climate were predicted by models participating in the Coupled Model
+Intercomparison Project Phase 6 (CMIP6). Given the availability of the data for the required
+variables, projections from sixteen global models (ACCESS-CM2, AWI-CM-1-1-MR, CAS-ESM2-0,
+CESM2-WACCM, CMCC-CM2-SR5, CNRM-CM6-1-HR, EC-Earth3-Veg-LR, FGOALS-g3, FIO-
+ESM-2-0, GFDL-ESM4, INM-CM5-0, IPSL-CM6A-LR, MIROC6, MPI-ESM1-2-LR, MRI-ESM2-0,
+NorESM2-MM) were employed to estimate soil pH.
+         Future (by 2050) changes in soil pH driven by nitrogen additions were quantified through the
+empirical relationship between cumulative N fertilizer inputs over 30 years (Nin, MgN ha-1) and the
+corresponding pH reductions (ΔpH) derived from national soil surveys in two time periods in China
+(Figure 7 of ref (63), ∆𝑝𝐻 = −0.06𝑁𝑖𝑛 + 0.11 ). This relationship captures responses of soil pH to
+nitrogen additions under field conditions. A majority of Chinese croplands have experienced
+significant soil acidification primarily due to fertilization and to a lesser extent by nitrogen deposition
+over the past several decades(64). The relationship used in the study covers a wide range of fertilizer
+inputs and soil pH reductions observed in Chinese soils. As such, it is capable of capturing the full
+range of potential soil pH changes, from the low to high end, making it suitable for global
+applications.
+         Cumulative chemical nitrogen fertilizer inputs (over the period of 2020-2050) under three
+future scenarios, in analogy to the above-mentioned SSPs, were projected by the GLOBIOM land use
+model (65). Projections follow the scenarios established for the INMS project
+(https://www.inms.international/) presented in ref (66), accounting for climate, development, land-
+use, diet and N policy driven demand for nitrogen inputs. These three scenarios are SSP1-2.6-High-
+Ambition-N policy scenario (i.e., sustainable development with high climate mitigation efforts and
+with low level of mineral N inputs), SSP2-4.5-Medium-Ambition-N policy scenario (i.e., middle-of-
+the-road socio-economic development with medium climate mitigation efforts and with medium level
+of mineral N inputs), and SSP5-8.5-Low-Ambition-N policy scenario (i.e., fossil-fueled socio-
+economic development without climate mitigation efforts and with high level of mineral N inputs).
+Atmospheric nitrogen depositions under SSP1-2.6, SSP2-4.5, SSP5-8.5 were obtained from the CCMI
+nitrogen deposition database initially prepared as the coordinated forcing datasets for CMIP6.
+Synthesis of soil-mediated inorganic carbon fluxes. We quantified the present-day contribution of
+soil-mediated inorganic carbon input into inland-waters (𝑓𝑆𝐼𝐶2𝑊 ) through two approaches (see Fig.
+S19).
+         The first approach utilized carbon inventories and derived 𝑓𝑆𝐼𝐶2𝑊 from subtracting total
+carbon flux from land to inland-waters (𝑓𝐿2𝑊 ) by all known non-SIC sources. 𝑓𝐿2𝑊 ranged from 2.7 –
+4.08 GtC yr -1 (5.1 in ref (67) was corrected to be 4.08 in ref (37) ) in literature(37, 67, 68), based on
+carbon stock and output from inland-waters. As the most recent comprehensive synthesis, ref(37)
+revised 𝑓𝐿2𝑊 to be 2.95 ± 0.28 (±1 sigma) GtC yr -1. This value, derived from multiple data sources
+from both observations and models, represents the robust and most current estimate of 𝑓𝐿2𝑊 and is
+used in our study. Known major sources that contribute to 𝑓𝐿2𝑊 include inorganic C export from
+bedrock weathering (0.39 ± 0.06 GtC yr -1 )(37), dissolved organic carbon (DOC) export from
+leaching and runoff (0.28 ± 0.04 GtC yr -1)(47), physical erosion of total recalcitrant particulate
+inorganic carbon (PIC, 0.15 ± 0.02 GtC yr -1)(37), organic carbon export from fossil and old-soil (0.15
+± 0.1 GtC yr -1)(37), organic C input from sewage to inland-waters (0.1 ± 0.02 GtC yr -1) (48) and
+particulate organic carbon transferred through soil erosion (𝑓𝑒𝑟𝑜𝑠𝑖𝑜𝑛2𝑊 ). Ref (49) provides evidence
+that earlier studies overestimated high values of 𝑓𝑒𝑟𝑜𝑠𝑖𝑜𝑛2𝑊 due to anthropogenic activities
+(Supplementary material S1.1 of ref (49)). Specifically, ref (49) reports a value of 0.5 ± 0.08 GtC yr -1
+attributed to erosions caused by water, wind, and tillage in crop and pasture lands. Anthropogenic
+activities across agricultural land accounted for roughly two-thirds of the global erosion(49, 50). In
+light of this evidence, we used an estimate of 0.75 ± 0. 11 GtC yr -1 for a reliable quantification of
+𝑓𝑒𝑟𝑜𝑠𝑖𝑜𝑛2𝑊 . At last, the gap of 1.13 ± 0.33 (1 sigma) GtC yr -1 is attributable to 𝑓𝑆𝐼𝐶2𝑊 .
+           The second approach estimated 𝑓𝑆𝐼𝐶2𝑊 by analyzing the gap in explaining riverine DIC
+primarily through rock weathering, without adequately accounting for the contribution of SIC. Using
+the expanded global database of riverine chemistry spanning all continents except Antarctica and
+Greenland, the atmospheric CO2 consumption by rock weathering (𝑓𝐶𝑂2) is linked with riverine DIC
+flux (𝑓𝐷𝐼𝐶2𝐸𝑂 , discharged from rivers to estuaries and oceans) as (see ref (69)),
+                  𝑓𝐷𝐼𝐶2𝐸𝑂 = 0.996 + 2.214 × 𝑓𝐶𝑂2 (R2 =0.66) (unit: TgC yr-1)              (S4)
+           At the global scale, 𝑓𝐷𝐼𝐶2𝐸𝑂 is around 410 TgC yr-1 (69). Therefore, Equation S4 can be
+approximated as 𝑓𝐷𝐼𝐶2𝐸𝑂 = 2.214 × 𝑓𝐶𝑂2. From the carbonate chemistry, the uptake of one
+atmospheric CO2 molecule during silicate weathering yields, at most, one molecule of HCO3- that
+contributes to DIC in water, whereas the weathering of carbonate rocks results in at most two DIC
+molecules per atmospheric CO2 molecule uptake. Silicate weathering accounts for 63% of the global
+rock weathering flux (70). Therefore, every mole of atmospheric CO2 uptake generates at most 1.37
+(𝑖. 𝑒. , 1 × 0.63 + 2 × 0.37) moles of DIC, that is
+                                         𝑓𝐷𝐼𝐶2𝐸𝑂 = 1.37 × 𝑓𝐶𝑂2             (S5)
+When considering only rock weathering, there is a gap of at least 0.844 × 𝑓𝐶𝑂2 (Equations S4 vs. S5).
+We illustrate below that this 0.844 × 𝑓𝐶𝑂2 gap is unlikely to be gained in inland-waters.
+           Present-day inland-waters are saturated in CO2 at the global scale, with CO2 outgassed from
+inland-waters reaching 1.85 GtC yr -1 in ref (37), and 2.1 – 2. 5 in ref (48, 67) ( 3.7 in ref (67) was
+corrected to be 2.5 in ref (37)). DOC and particulate organic carbon (POC) delivered from inland-
+waters to the estuaries toward oceans are relatively well constrained at around 0.4 GtC yr -1 (69, 71).
+Inland-water carbon burial is around 0.15 GtC yr -1 (37, 72). If DOC and POC are the only sources
+that contribute to degassing, it requires at least 2.4 (i.e., 1.85 + 0.4 + 0.15) GtC yr -1 of DOC and POC
+as input into inland-waters. Existing data shows that DOC and POC inputs into inland-waters are less
+than 2.4 GtC yr -1 (DOC: 0.28; 𝑓𝑒𝑟𝑜𝑠𝑖𝑜𝑛2𝑊 : 0.75 GtC yr -1; see numbers from the first approach).
+Altogether, there need inorganic carbon sources to close the carbon budget. The contribution of PIC to
+𝑓𝐿2𝑊 is relatively small (0.15 GtC yr -1 in ref (37)) and in the same magnitude as PIC delivered toward
+oceans (69). Therefore, at the global scale the 0.844 × 𝑓𝐶𝑂2 mismatch is attributable to unaccounted
+input of DIC into inland-waters.
+           Among the 2.8 GtC yr -1 (POC, DOC, DIC; PIC not included) exported from land to inland-
+waters, 0.95 GtC yr -1 reached river mouths where the water enters estuaries and moves toward the
+ocean (see ref (37)), resulting an input/delivery ratio of 2.95. As a coarse approximation, here we
+assume the input/delivery ratio for DIC is the same as the overall value of 2.95. This value is
+relatively conservative compared to 3.45 estimated from the total DIC input flux from the first
+approach dividing the amount of DIC ((1.13 + 0.39)/0.44 ) exported toward the ocean. To keep the
+second approach relatively independent from the first approach, we use the value of 2.95 for the
+following estimations. A gap of 0.844 × 𝑓𝐶𝑂2 in 𝑓𝐷𝐼𝐶2𝐸𝑂 at delivery corresponds to a gap of 2.49 ×
+𝑓𝐶𝑂2 at input from land to inland-waters that is unaccounted, i.e., at least 0.72 GtC yr -1 (𝑓𝐶𝑂2 is
+around 0.29 GtC yr -1, see ref (37)) of DIC exported to inland-waters that could not be explained by
+the estimation through chemical weathering, which is based mostly on rock distributions. Note that
+this value represents a conservative lower bound on the actual 𝑓𝑆𝐼𝐶2𝑊 , as processes such as retention
+of the weathering products in soils, consumption of DIC (e.g., uptake by vegetation and CO2 evasion)
+sourced from weathering in inland-waters, would contribute to an underestimate of the real value.
+           To account for processes affecting rock-weathering-sourced DIC in inland-waters, we applied
+an input/delivery ratio of 2.95 to the rock weathering flux (now, 𝑓𝐷𝐼𝐶2𝐸𝑂 = 1.37 × 𝑓𝐶𝑂2 /2.95 ),
+which gave us a mismatch of (2.214 − 1.37/2.95) 𝑓𝐶𝑂2 in calculating 𝑓𝐷𝐼𝐶2𝐸𝑂 . Using the similar
+calculation as described earlier, 𝑓𝑆𝐼𝐶2𝑊 reached 1.5 GtC yr -1 that could not be explained by
+weathering flux derived primarily from rocks.
+           There are several sources of uncertainties in the second approach that we did not quantify. A
+clear separation of soil from rock is difficult. Global chemical weathering estimates typically rely on
+modelled weathering fluxes that are upscaled by distributions of lithological classes. SIC was not
+explicitly accounted for in quantifying the global chemical weathering, while in some models,
+parameterization through riverine chemistry to some extent indirectly (might also incorrectly) reflects
+contributions from soil minerals. The chemical weathering flux applied in this study brought limited
+signal from SIC as the weathering model was parameterized in locations with low SIC content(69,
+70). On the other hand, if Ca2+ released from rock weathering stays in soil, 𝑓𝑆𝐼𝐶2𝑊 should be larger
+than the estimation (1.5 GtC yr -1) assuming all weathering fluxes reach inland-waters. There are also
+uncertainties associated with the empirical relationship presented in Equation S4. To be conservative,
+we report here that at least 1.13 ± 0.33 (1 sigma) GtC is transferred to inland-waters every year via
+soils, with the second approach serving as an independent line of evidence to support the robustness
+of the first approach. Note here, by inland-waters, we partially accounted for the groundwater that are
+headwater of streams, but might not all groundwater that might be affected by SIC.
+         From carbonate chemistry, for every mole of CO2 taken up, 2 moles of HCO3- (DIC) are
+produced. To deliver 1.13 GtC yr -1 of DIC (if all sourced from carbonates, which is not true in
+reality) to inland-waters, 0.56 GtC yr -1 of CO2 is taken up through SIC dissolution. However, SIC
+dissolution can also occur under highly acidic conditions, generating CO2 instead of HCO3-. It has
+been reported that 12-38% of the total dissolved SIC contributes to CO2 degassing (30, 31, 34, 35).
+Taking the median value of 25% as the estimate of the degassing fraction, we estimated a degassing
+flux of 0.19 GtC yr-1. Consequently, carbonate dissolution resulted in a net uptake of atmospheric
+carbon of 0.37 GtC yr-1 by soil through the inorganic pathway. Of the 1.13 GtC yr-1 that enter inland-
+waters, 0.71 GtC yr-1 are released from inland-waters to the atmosphere, assuming an input/delivery
+ratio of 2.95 as previously mentioned. We estimated that 0.057 GtC yr -1 from inland-water burial
+came from SIC-sourced carbon, out of a total of 0.15 GtC yr -1, by the portion of input from SIC vs.
+the total input into inland-waters. The contribution of SIC-sourced carbon to oceanic carbon is
+therefore 0.36 GtC annually. The loss of SIC acted as a source of 0.34 GtC yr-1 to the atmosphere
+when considering both soil and inland-waters as “land” if we assume that all 𝑓𝑆𝐼𝐶2𝑊 come from
+carbonates. In this study, we use the term “terrestrial ecosystem” to differentiate it from “land”, which
+includes inland-waters in our context. The unaccounted land-atmospheric CO2 exchange from SIC is
+likely implicitly incorporated as part of terrestrial ecosystem-biosphere carbon fluxes sourced from
+the soil. In Fig. 4C, we separated the original terrestrial ecosystem carbon into terrestrial ecosystem
+(organic) and soil (inorganic) (Fig. 4C).
+         SIC-atmosphere and SIC-inland-water fluxes estimated in this study did not explicitly
+distinguish between naturally formed SIC and anthropogenic additions through liming that could
+contribute to these fluxes. Additionally, we did not quantify the indirect effect of SIC such as on soil
+organic carbon stabilization (11), primary productivity (8, 73, 74), and the burial of organic matter in
+aquatic ecosystems (“biological pump”) (75). While aquatic organisms rely on DIC or mineralization
+of DOC to support photosynthesis and organic matter production, the relative contribution of these
+sources is not known. Nonetheless, organic carbon buried in inland-waters is around 0.15 GtC yr-1
+(37), and the indirect carbon sequestration resulting from source of SIC is not significant enough to
+change the overall contribution of soil-mediated inorganic carbon as a source of CO2. For weathering
+carbon fluxes, we did not separate the amount that goes directly (surface rocks) into inland-waters
+versus the amount that contributes to SIC first and then enters the inland-waters. As a first step, we
+reconstructed a plausible SIC-related major carbon fluxes, as presented in Fig. 4C, based on estimates
+in limited literature, and a more nuanced approach is necessary to fully assess the robustness and
+uncertainties associated with these fluxes.
+
+Supplementary Text
+     1. Standardization and integration of measured SIC
+      Soil inorganic carbon (SIC) records from the ISRIC World Soil Information Service (WoSIS)
+included 268,783 samples from 51,925 sites. We standardized this database through removing
+irrelevant layers, consistency check of sampling depth, removing soil profiles without information of
+calcium carbonate equivalent and removing samples measured before 1970. We deleted the profile
+with NA data and used the averages of SIC values of the same layers from all profiles. At last, we
+obtained 198,944 samples from 47,364 sites collected by WoSIS.
+       Consistency of sampling depth for one soil profile means that “upper_depth” (upper depth of
+layer) of the first layer is zero, both “upper_depth” and “lower_depth” (lower depth of layer) are not
+NULL and should be greater than zero, and “lower_depth” should be greater than “upper_depth”. We
+removed “litter layers” in the WoSIS database before checking the consistency of sampling depths, as
+they are not soils per se. A small portion of sampling depths were not consecutive and were revised
+accordingly.
+       Depth values are negative. We manually revised them as corresponding positive values.
+       There are two or more layers starting from 0 for one soil profile. We deleted one layer.
+       The first layer does not start from 0. We set the “upper_depth” of the first layer to 0.
+           “lower_depth” is zero. These values were manually revised.
+       The information on the “upper_depth” and “lower_depth” is missing (NA). If both
+           “upper_depth” and “lower_depth” are missing, we delete these layers. If one profile only has
+           one topmost layer, we manually set the “lower_depth” as 20 cm. Otherwise, the
+           “lower_depth” is set by adding 30 cm and 50 cm for “upper_depth” less and greater than
+           100 cm, respectively, considering the increments of sampling depth of subsoils are generally
+           greater than topsoils.
+       “upper_depth” is greater than “lower_depth”. We manually flipped these depths, or removed
+           this soil layer if this layer is redundant and removing it does not affect the consecutiveness
+           of this profile. Otherwise, the depth values were revised according to the depth increments
+           of adjacent upper and below layers.
+       The values of the “upper_depth” and “lower_depth” are the same in adjacent layers. We
+           deleted these redundant layers. However, we found some layers need to be checked
+           manually according to the vertical variation of carbonate contents and manually revised
+           these profiles.
+       We included covariates such as soil pH (water), sand, silt, clay, soil organic carbon content, bulk
+density, volumetric content of coarse fragments (>2 mm), cation exchange capacity (buffered at pH7),
+total soil nitrogen, total soil phosphorus content, Bray1 phosphorus and electrical conductivity from
+WoSIS. For samples reporting gravimetric content of coarse fragments, we converted it to volumetric
+content of coarse fragments according to Ribeiro et al. (2020). For bulk density (BD), we remapped
+BD of the fine earth fraction equilibrated at 33 kPa (BDFI33) to BD of the fine earth fraction
+measured by oven dry (BDFIOD) using the pedotransfer function (PTF) between BDFI33 and
+BDFIOD. We built the PTF through samples measuring both BDFI33 and BDFIOD (N=40,470). We
+fitted six frequently applied linear and non-linear functions and used the PTF that yielded the highest
+R-squared (Fig. S21). The R2 values ranged from 0.55 to 0.67. A linear function is adopted, i.e.,
+BDFIOD=0.1736+0.9197BDFI33 (R2: 0.67) (Fig. S21)
+       We supplemented WoSIS database with local studies compiled from literature, country-level
+inventories and coordinated field campaigns. We standardized these datasets following the same
+procedure as for WoSIS and added 24,649 samples from 7,713 sites across the globe (Fig. S2). Ref (4,
+52) provided additional information about datasets from China, Ref (53) from Germany, Ref (54)
+from Egypt. Additional dataset from Russia were measured and provided by co-authors. We also
+searched the literature and added data sources that were not in our constructed database. Fig. S1
+shows the searching algorithm and procedures. References to this literature extracted data are
+provided in Table S12.
+     2. Comparison with other large-scale estimations of SIC storage.
+       Existing estimation of the global total SIC budget (Table S1) varies among studies partly due to
+the differences in soil depth and land area covered by different studies. Earlier estimations were based
+on upscaling the mean SIC content by the area of land/soil units. From the pioneer work of
+Schlesinger 1982 (2) to more recent study of Batjes 2016 (76), the number of SIC measurements has
+been increasing (from around 90 to 21,000 soil profiles) and the map of land/soil unit is more detailed,
+moving from very coarse to relatively high resolution (e.g., ~30 seconds). Traditional land/soil unit-
+based mapping methods predicted soil properties according to soil units (i.e., soil types), with the
+underlying assumption that soil is homogeneous within soil units that belong to the same class/type
+(Tables S1, S12). Notably, some information might be lost on these polygon-based maps, as the
+production of traditional soil maps required soil information to be condensed and data to be classified.
+Our estimation and mapping of SIC is not based on soil units. Soils belonging to the same soil unit but
+from different places might have different SIC from our estimation considering the heterogeneity
+nature of soil. Our estimation links SIC to the particular local environment represented by around 60
+environmental covariates. SIC storage estimated from our study is less homogeneous compared to
+earlier studies. In addition, with the compiled databases with a much larger number of measurements
+(223,593 measurements from 55,077 soil profiles), our estimation is expected to reflect the real world
+more closely.
+      The mean SIC of Aridisols from our study reaches 39 kg m-2, which is between 66 (calcareous)
+and 33 (non-calcareous) kg m-2 from desert soils used in earlier global estimations that upscaled
+averages from limited number of soil profiles by areas of interpretive soil types/units (1, 2, 20) (Table
+S1). For country-level budgets, our estimate is comparable with values compiled from literature
+(Table S5). A wider distribution of SIC (e.g., in humid region, or local variations that are
+misrepresented by soil mapping types/units), or the higher content of SIC in deeper soils make our
+global budget larger than earlier global estimations (Tables S1, S4, S6). The high accuracy of our
+data-derived models in predicting out-of-sample values ensures that our estimation closely reflects
+patterns embedded in observations (Figs. 1, 2).
+      Our map shows the existence of SIC around central Africa because in our complied database, the
+content of SIC is relatively large in some part of the central Africa (Fig. 1). These data points come
+from the World Soil Information Service (WoSIS) Soil Profile Database (Fig. S2), which has been
+carefully harmonized and standardized by the international community. In regions where we predicted
+non-trivial SIC, i.e., around the border of Cameroon, Central African Republic, Republic of the
+Congo, and Democratic Republic of the Congo, the carbonate rock, karst environment (77) , alluvial
+deposits (Fig. S5) and dust deposition (78) likely contribute to the presence of SIC. Examining the
+Köppen–Geiger climate classification reveals a tropical savanna and monsoon climate in this area,
+distinguishing it from a tropical rainforest climate (79). That being said, we acknowledge that there
+are uncertainties in assessing the extent and magnitude of SIC content around central Africa when
+observations are limited. We recognize that additional observations and measurements will contribute
+to minimizing these uncertainties.
+     Soils with no SIC in the top soil (0-30cm, SIC < 0.1 kg m-2), but accumulations of SIC in deeper
+soils (30-100cm, or 100-200cm, SIC > 0.1 kg m-2) were predicted to spread across regions (Fig. S10).
+A considerable portion of Russian soils is characterized by lack of SIC in the top soil, and
+accumulation of SIC in deeper soils. The prediction is supported by local studies, for example, in
+Western Siberia(80), South Siberia (81), Central Yakutia (82) or of forest soils in Russia (83), and
+also by the humus-carbonate soils that have been documented as part of Russian soils (84). For these
+soils, humus accumulates on top of soils developing from cation-rich material such as carbonate
+parent material or loess dust.
+     3. Predictors of SIC other than soil pH
+      The storage of SIC is shaped by multiple factors interacting with each other. Acidity, especially
+in concurrent with sufficient water, accelerates losses of SIC. The importance of soil pH emerged
+from data due to the strong coupling of pH and the carbonate system (Equations S1, S2). The presence
+of SIC is also affected by variations in temperature. Soils located in regions with a low temperature
+seasonality and annual temperature range smaller than 25 °C (e.g., the tropics) are associated with
+highly weathered and well-developed soils that are more likely to be depleted of SIC. Cation
+exchange capacity (CEC), a measure of the capacity of soil to supply cations (e.g., calcium,
+magnesium and potassium) is ranked among the top six factors explaining the global pattern of the
+presence of SIC, in line with the importance of cation in the formation of solid carbonate. In addition
+to factors listed above, numerous edaphic, climatic, topographic and anthropogenic factors contribute
+to develop the global pattern of the distributions of SIC.
+      Soil pH stands out as the top important predictor explaining the size of SIC from SIC-bearing
+soils. In addition, cation exchange capacity, Palmer drought severity index, soil texture, phosphorus
+deposition (likely correlates with aeolian dust carries both phosphorus and calcium) and volumetric
+coarse fragments are also among the top 6 most important predictors of the magnitude of SIC across
+the globe (Fig. 3). Their relationship with SIC show different degrees of non-linearities (Fig. 3). These
+six predictors together explain 28.9% of the total captured variations, leaving the remaining variations
+explained by factors such as soil clay content, soil depth, precipitation of the warmest quarter, soil
+sand content, wind speed, nitrogen deposition rate (nhx), soil organic matter content, temperature
+seasonality, precipitation seasonality, precipitation of wettest quarter, temperature annual range,
+reference evapotranspiration (FAO 56 Penman-Monteith Method), and the bulk density.
+
+    4. Derive pH-SIC curve.
+     To isolate the relationship between pH and SIC content, we calculated the contribution of pH in
+explaining variations of SIC through estimation the gain of SIC (deviation from the mean value)
+explained by pH for each soil sample, in short, 𝑆𝐼𝐶𝑝𝐻 . We quantified 𝑆𝐼𝐶𝑝𝐻 as the marginal
+contribution (estimation with a particular pH value vs. the average from all combinations of predictor
+space without that pH value) indicated by Shapley values. The density plot of pH vs. 𝑆𝐼𝐶𝑝𝐻 displays a
+S-shape (Fig. 3). We fitted samples by a 5-parameter sigmoid function. To avoid numerical issues of
+curve-fitting, we separated pH (from 4 to 10) into 6000 equally distributed bins and calculated the
+means that we used for curve fitting (Figs. S11, S12; Table S9).
+
+                             𝑏
+     𝑆𝐼𝐶𝑝𝐻 = 𝑐 + 𝑎+𝑒 −𝑘(𝑝𝐻−𝑥0)           (S6)
+
+    5. pH at equilibrium with calcite dissolution.
+      The pH at equilibrium with calcite dissolution was calculated considering open conditions for
+the CaCO3-H2O-CO2 system, represented by the following equation derived from the chemical
+equilibria:
+           2 𝐾𝐶𝑎𝐶𝑂3
+     𝐾𝐻2 𝐶𝑂3 𝐾𝐻𝐶𝑂− 𝐾𝐻 𝑃𝐶𝑂2
+                             [𝐻 + ]4 + [𝐻 + ]3 − (𝐾𝑤 + 𝐾𝐻2 𝐶𝑂3 𝐾𝐻 𝑃𝐶𝑂2 ) [𝐻 + ] −
+                 3
+ 2𝐾𝐻2 𝐶𝑂3 𝐾𝐻𝐶𝑂3− 𝐾𝐻 𝑃𝐶𝑂2 = 0            (S7)
+                +
+      where [𝐻 ] is the hydrogen ion activity in moles, 𝐾𝐶𝑎𝐶𝑂3 is the solubility constant of CaCO3
+(in units of mol2 L−2), 𝐾𝐻2 𝐶𝑂3 and 𝐾𝐻𝐶𝑂3− are the dissociation constants of carbonic acid (mol L−1), 𝐾𝑤
+is the dissociation constant for water (mol2 L−2), KH is Henry’s constant (mol L−1 atm−1), and 𝑃𝐶𝑂2 is
+the partial pressure of CO2 (in atm). We solved this equation to estimate pH at 25 °C and with
+reaction constants following Ref (85) based on the PHREEC program through Python ympy.solvers.
+We calculated soil pH with 𝑃𝐶𝑂2 ranging from 350 𝑡𝑜 400 × 10−4 𝑎𝑡𝑚. Results of soil pH goes from
+8.23 to 8.19. This 𝑃𝐶𝑂2 range covers most laboratory measurement conditions under the standard
+atmospheric pressure in recent several decades and its impact on soil pH is relatively small.
+
+    6. Pattern of the pH-SIC curve.
+      Soils from multiple soil orders, under different vegetation covers and in different soil depths
+generally follow a similar sigmoid-type curve for the relationship between soil pH and 𝑆𝐼𝐶𝑝𝐻 . Under
+acidic conditions, the curve is relatively flat, followed by steep changes in the pH range between 7
+and 8.5, and then plateaus and remains relatively stable. The sigmoid-type curve reflects theoretical
+understandings of the carbonate chemistry underlying calcium carbonate preservation. Acidic
+conditions favor calcium carbonate dissolution that limits the accumulation of SIC. The magnitude of
+increment of solubility of calcium carbonate with pH is very small under strong alkaline (e.g., > 8.5)
+conditions, making further increasing pH have a small impact on SIC. On the other hand, SIC content
+beyond the saturation point in soil solution no longer contributes to variations in soil pH, making pH
+value larger than the equilibrium pH (with calcite dissolution) less indicative for solid carbonate
+content. The overall (global) pH-SIC curve emerges as the integrated outcome of carbonate chemistry
+and the world’s soil environment. The principles of carbonate chemistry play the first order role in
+SIC distribution and accumulation, which are compounded by the sources of Ca2+, climatic,
+topographic, biological, and edaphic conditions. We found deviations from the global pH-SIC curve
+when samples were grouped by soil orders, soil depths and land cover types.
+      Among different soil orders, Oxisols, characterized by low cation exchange capacity and low
+weatherable minerals to buffer pH, shows the most abrupt (large k value) changes of SIC in response
+to soil pH, while Alfisols and Mollisols display the most smooth (small k value, Equation S6; Table
+S9) changes in the pH-SIC curve, given their capability to neutralize H+ from sources other than SIC
+(e.g., organic matter and clay minerals). Generally speaking, most Mollisols have had grass vegetation
+at some stage. Melanization (the process of darkening of the soil by organic matter additions) is one
+of the most important processes in the formation of a Mollisol. Mollisols are generally fertile and rich
+in organic matter, which can function to buffer H+, for example, through the formation of Ca-humic
+materials, or base-rich clays. Alfisols often contain significant amounts of clay minerals, such as
+kaolinite, illite, and montmorillonite. Clay minerals have a high cation exchange capacity, which
+means they can hold onto and exchange positively charged ions (cations), including hydrogen ions
+(H+). This property helps buffer changes in soil pH. The sensitivity of SIC to pH displays a bell shape,
+with the maximum sensitivity at pH = 7.89, and this value varies from 7.86 to 8.04 across different
+soil orders. Despite a large portion of the global SIC accumulated in Aridisols, Aridisols hold less SIC
+under strong alkaline conditions than other soil orders.
+       Along soil depths, topsoil (0-0.3m) shows more abrupt (larger k value) transitions in the pH-SIC
+curve than the middle (0.3-1m) and bottom (1 – 2 m) soil layers. pH results in a smaller range of
+variations in SIC (b/a in Equation S6) in topsoil than deeper soil layers. Under strong alkaline
+conditions, deeper soils hold more SIC than the topsoil.
+       Between tree and grass, soils under the tree show a smoother transition in the pH-SIC curve. pH
+results in a larger range of variations in SIC (b/a) with tree cover than under grass Under strong
+alkaline conditions.
+     7. Convergence of the pH-SIC curve.
+       Compared to the global pH-SIC curve, the differences within soil orders, soil depths or
+vegetation types are smallest around soil pH = 8.0 (Fig. S13), a value that is close to the theoretical
+pH value of 8.2 when the soil solution equilibrium with calcite dissolution (Supplementary Text 5).
+The divergences increase as pH moves away from the minimal point at pH = 8.0. Under acidic
+conditions, the variation among different soil conditions is large and remains relatively constant as
+SIC does not vary much with soil pH. The deviations peak shortly after pH =7 with initially differed
+sensitivity of SIC to soil pH.
+                    Records identified through               Additional records
+  Identification
+
+
+                   ISI Web of Science database            identified through other
+                       searching (n = 12,599)                 sources (n = 52)
+
+
+
+
+                                   Records after duplicates removed
+                                             (n = 12,640)
+  Screening
+
+
+
+
+                                                                              Records
+                                       Records screened
+                                                                              excluded
+                                         (n = 12,640)
+                                                                            (n = 12,344)
+
+
+
+                                                                  Full-text articles excluded,
+                          Full-text articles assessed              with reasons: no data to
+  Eligibility
+
+
+
+
+                                 for eligibility                     extract; overlap with
+                                   (n = 296)                           existing database
+                                                                            (n = 250)
+
+
+
+
+                            Studies included in
+                           quantitative synthesis
+  Included
+
+
+
+
+                                  (n = 46)
+
+
+
+
+Fig. S1. PRISMA flow diagram showing the procedure of selecting studies for extracting SIC data
+from the ISI Web of Science platform. We used “soil inorganic carbon (Topic) or calcium carbonate
+(Topic) and soil (All Fields) from 1970-01-01 to 2021-07-01” as the criterion to search through the
+ISI Web of Science platform.
+Fig. S2. The distribution of samples from different sources.
+Fig. S3. Scatter plot of SIC content vs. soil pH.
+Fig. S4. Spatial distributions of the Soil Inorganic Carbon (SIC) in different soil depths.
+Fig. S5. Spatial distributions of the Soil Inorganic Carbon (SIC) in the humid region in different soil
+layers. Black lines and shapes indicate rivers and lakes.
+Fig. S6. Spatial distributions of the standard deviation (STD) and coefficients of variations (CV) of
+Soil Inorganic Carbon (SIC) in different soil layers. STD was calculated from 10 models trained from
+10-fold cross validations.
+Fig. S7. The distribution of the climate zones based on aridity. The hyperarid, arid, semiarid,
+subhumid zones occupy 7.8%, 12.1%, 17.7%, 9.9% and 52.5% of the land area from the driest to the
+wettest based on the aridity index from the Global Aridity Index and Potential Evapotranspiration
+(ET0) Climate Database v2
+(https://figshare.com/articles/dataset/Global_Aridity_Index_and_Potential_Evapotranspiration_ET0_
+Climate_Database_v2/7504448/3, accessed May 2022).
+Fig. S8. Spatial distribution of carbonate sedimentary rock according to USGS global ecosystem map
+(Table S2). Black lines and shapes indicate rivers and lakes.
+Fig. S9. Spatial distribution of soil orders based on USGS global ecosystem map (Table S2).
+Fig. S10. Locations of soils with no SIC in the top soil (0-0.3m, SIC < 0.1 kg m-2), but existence
+(SIC > 0.1 kg m-2) of SIC in deeper soils: A, 0.3-1m and B, 1-2m.
+Fig. S11. The sigmoidal curve between soil pH and the contribution of pH (𝑆𝐼𝐶𝑝𝐻 ) to variations in
+SIC across soil orders, soil depths and vegetation covers. The variations are quantified as the
+deviation of SIC to the global mean value. The contribution (𝑆𝐼𝐶𝑝𝐻 ) is quantified as the marginal
+effect of soil pH fitted to a sigmoidal function (see Table S9 for fitted values).
+Fig. S12. Scatter plots of the contribution of pH to variations in SIC (𝑆𝐼𝐶𝑝𝐻 ) vs. pH across different
+soil orders. Dots indicate mean 𝑆𝐼𝐶𝑝𝐻 within a pH bin of length 0.001 (pH from 4-10, 6000 bins).
+Lines are fitted sigmoidal curves. Note the fitted curves are the same as in the left panel of Fig. S11.
+Fig. S13. Sensitivities of 𝑆𝐼𝐶𝑝𝐻 to pH across soil orders, soil depths and vegetation covers.
+Fig. S14. Distances within soil orders, soil depths and vegetation covers for 𝑆𝐼𝐶𝑝𝐻 . Distances are
+quantified as root mean square errors.
+Fig. S15. Spatial distribution of changes in SIC in response to a 0.1 unit change in soil pH in different
+soil depths. a, c, e shows responses to soil pH reductions and b, d, f to increases in soil pH.
+Fig. S16. Spatial distribution of changes in SIC in response to a 0.5 unit change in soil pH in different
+soil depths. a, c, e shows responses to soil pH reductions and b, d, f to increases in soil pH.
+Fig. S17. Changes of soil pH (0-0.3m depth) due to future global warming and altered hydrological
+cycles under three climate scenarios.
+Fig. S18. Nitrogen addition induced soil pH (0-0.3m depth) reductions over thirty years (2020-2050)
+under SSP1-2.6-High-Ambition-N (low mineral N inputs), SSP2-4.5-Medium-Ambition-N (medium
+mineral N inputs) and SSP5-8.5-Low-Ambition-N (high mineral N inputs) policy scenarios.
+Fig. S19. Illustration of two approaches to quantify the input of soil inorganic carbon to inland waters
+(fSIC2W). fDIC2EO refers to dissolved inorganic carbon discharged from river toward estuaries and
+oceans. fCO2 means the atmospheric CO2 consumption during rock weathering (see Methods). Units
+are GtC yr -1 except the delivery ratio which is unitless. Uncertainties (after ±) are estimated as one
+standard deviation (one sigma).
+Fig. S20. Observed vs. predicted soil inorganic carbon (SIC) from10-fold cross-validation. Different
+from Panels D and E in Fig. 2, here results are shown separately for samples from different soil
+depths. Model performance is generally the same for samples from different depths.
+Fig. S21. Relationship between bulk density of the fine earth fraction equilibrated at 33 kPa (BDFI33)
+vs. bulk density of the fine earth fraction measured by oven dry (BDFIOD). The blue and red lines
+denote the fitted regression and the 1:1 line, respectively.
+Supplementary Tables
+
+
+Table S1. Global SIC budget from literature.
+
+ Reference      Region                Total     Method                   Depth      Samples
+                                      SIC
+                                      (GtC)
+ Schlesinger    Aridisols,            780       Mean, total area         ≥125cm     91 Arizona soils
+ 1982(2)        Arid Entisols
+ Schlesinger    Secondary             550-      Mean, total area         Variable   91 Arizona soils
+ 1985(1)        carbonate, arid       1500,                                         + other desert
+                region.               “best”:                                       soils
+                                      930
+ Sombroek et    Secondary             720       Mean, area of the FAO-   ≥125 cm    91 Arizona soils
+ al 1993(20)    carbonate, arid                 UNESCO soil subunit                 from Schlesinger
+                region.                                                             1982
+ Batjes         World                 695 –     Mean, area of the FAO-   0-100      4353 profiles,
+ 1996(21)                             748       UNESCO soil subunit      cm         32% have data
+                                                                                    for SIC
+ Eswaran et     World                 940       Mean, FAO-UNESCO soil    0-100
+ al 2000(22)                                    map combined with the    cm
+                                                USDA-NRCS soil climate
+                                                map
+ Plaza et al    World                 1558      Mean, soil units from    0-200      WISE30sec
+ 2018 (23)                                      Harmonized World Soil    cm
+                                                Database
+Table S2. The source, unit, category, resolution, time coverage and reference of gridded global datasets used in
+this study. All datasets were accessed in October 2021.
+ Category      Short Name     Long Name                    Unit      Data       Spatial   Time         Reference
+                                                                     Source               Average
+ Soil and      BD             Bulk density                 g/cm3     SoilGrid   250m      curent       https://www.isric.org/explore/soilgrids
+ Environment   pH             pH(H2O)                                SoilGrid   250m      curent
+               Sand           Sand content                 %         SoilGrid   250m      curent
+               Silt           Silt content                 %         SoilGrid   250m      curent
+               Clay           Clay content                 %         SoilGrid   250m      curent
+               SOC            Soil organic carbon          g/kg      SoilGrid   250m      curent
+               CFVO           Coarse fragments             %         SoilGrid   250m      curent
+                              volumetric total
+               CEC            Cation exchange capacity     cmol/kg   SoilGrid   250m      curent
+               TN             Total soil nitrogen          %         GSDE       1km       curent       http://globalchange.bnu.edu.cn/research/soilw
+               PBR            Bray1 phosphorus             ppm of    GSDE       1km       curent       http://globalchange.bnu.edu.cn/research/soilw
+                                                           weight
+               TP             Total soil phosphorus        %         GSDE       1km       curent       http://globalchange.bnu.edu.cn/research/soilw
+               ECE            Electrical conductivity      dS/m      Hassani    1km       1980-2018    https://figshare.com/articles/dataset/Predicting_Long-
+                                                                                                       term_Dynamics_of_Soil_Salinity_and_Sodicity_on_a
+                                                                                                       _Global_Scale/13295918/1
+               SoilLoss       Soil erosion                 t/ha/yr   GloSEM     25km      2001, 2012   https://esdac.jrc.ec.europa.eu/content/global-soil-
+                                                                                                       erosion
+               Nfert          Nitrogen fertilizer          g         Lu_Tian_   0.5°      1970-2013    https://doi.pangaea.de/10.1594/PANGAEA.863323
+                              application rate             N/m2/yr   2016
+               Pfert          Phosphorus fertilizer        g         Lu_Tian_   0.5°      1970-2013    same as above
+                              application rate             N/m2/yr   2016
+               Ndep_nhx       Nitrogen deposition nhx      g/m2/y    (86)       0.5°      1970-2020
+               Ndep_noy       Nitrogen deposition noy      g/m2/y    (86)       0.5°      1970-2020
+               Pdep           Phosphorus deposition        g/m2/y    (87)       0.5°      1970-2020
+ Climate       AI             Aridity Index                          ai_et0     1km       1970-2000    https://figshare.com/articles/dataset/Global_Aridity_I
+                                                                                                       ndex_and_Potential_Evapotranspiration_ET0_Climat
+                                                                                                       e_Database_v2/7504448/3
+               ET             Reference                              ai_et0     1km       1970-2000    same as above
+                              Evapotranspiration,
+                              FAO 56 Penman-Monteith
+                              Method
+
+               TempAnnual     Annual Mean Temperature                WorldCli   1km       1970-2000    https://worldclim.org/data/worldclim21.html
+               Mean                                                  m2.1
+               TempDiurna     Mean Diurnal Range                     WorldCli   1km       1970-2000    same as above
+               lRange         (Mean of monthly (max                  m2.1
+                              temp - min temp))
+               Isothermalit   Isothermality                          WorldCli   1km       1970-2000    same as above
+               y              (TempDiurnalRange/Temp                 m2.1
+                              AnnualRange) (×100)
+               TempSenson     Temperature Seasonality                WorldCli   1km       1970-2000    same as above
+               ality          (standard deviation ×100)              m2.1
+               TempMaxW       Max Temperature of                     WorldCli   1km       1970-2000    same as above
+               armestM        Warmest Month                          m2.1
+               TempMinCo      Min Temperature of                     WorldCli   1km       1970-2000    same as above
+               ldestM         Coldest Month                          m2.1
+               TempAnnual     Temperature Annual Range               WorldCli   1km       1970-2000    same as above
+               Range          (TempMaxWarmestM -                     m2.1
+                              TempMinColdestM )
+               TempWettes     Mean Temperature of                    WorldCli   1km       1970-2000    same as above
+               tQ             Wettest Quarter                        m2.1
+               TempDriest     Mean Temperature of                    WorldCli   1km       1970-2000    same as above
+               Q              Driest Quarter                         m2.1
+               TempWarme      Mean Temperature of                    WorldCli   1km       1970-2000    same as above
+               stQ            Warmest Quarter                        m2.1
+               TempColdes     Mean Temperature of                    WorldCli   1km       1970-2000    same as above
+               tQ             Coldest Quarter                        m2.1
+               PreAnnual      Annual Precipitation                   WorldCli   1km       1970-2000    same as above
+                                                                     m2.1
+               PreWettestM    Precipitation of Wettest               WorldCli   1km       1970-2000    same as above
+                              Month                                  m2.1
+               PreDriestM     Precipitation of Driest                WorldCli   1km       1970-2000    same as above
+                              Month                                  m2.1
+               PreSeasonali   Precipitation Seasonality              WorldCli   1km       1970-2000    same as above
+               ty             (Coefficient of Variation)             m2.1
+               PreWettestQ    Precipitation of Wettest               WorldCli   1km       1970-2000    same as above
+                              Quarter                                m2.1
+               PreDriestQ     Precipitation of Driest                WorldCli   1km       1970-2000    same as above
+                              Quarter                                m2.1
+               PreWarmest     Precipitation of Warmest               WorldCli   1km       1970-2000    same as above
+               Q              Quarter                                m2.1
+               PreColdestQ    Precipitation of Coldest               WorldCli   1km       1970-2000    same as above
+                              Quarter                                m2.1
+               Wind           Wind speed                   m/s       WorldCli   1km       1970-2000    same as above
+                                                                     m2.1
+               Soiltemp       Soil temperature             K         ERA5       0.25°     1979-2020    same as above
+               Soilwater      Volumetric soil water        m3/m3     ERA5       0.25°     1979-2020    same as above
+               Runoff         Runoff                       m         ERA5       0.25°     1979-2020    https://cds.climate.copernicus.eu/cdsapp#!/dataset/rea
+                                                                                                       nalysis-era5-single-levels?tab=form
+               WTD            Water table depth            m         Fan2013    Fan20     current      https://glowasis.deltares.nl/thredds/catalog/opendap/o
+                                                                                13                     pendap/Equilibrium_Water_Table/catalog.html
+               AET            Actual Evapotranspiration    mm        TerraCli   4km       1970-2018    https://climate.northwestknowledge.net/TERRACLI
+                                                                     mate                              MATE-DATA/
+               DEF            Climate Water Deficit        mm        TerraCli   4km       1970-2018    same as above
+                                                                     mate
+               SRAD           Downward surface             W/m2      TerraCli   4km       1970-2018    same as above
+                              shortwave radiation                    mate
+               VAP            Vapor pressure               kPa       TerraCli   4km       1970-2018    same as above
+                                                                     mate
+             PDSI        Palmer Drought Severity                TerraCli    4km   1970-2018   same as above
+                         Index                                  mate
+Depth,       Depu        Upper layer depth of soil   cm
+topology,    Depl        Lower layer depth of soil   cm
+landform,    DEM         DEM                                                1km   Current     http://hydro.iis.u-
+lithology                                                                                     tokyo.ac.jp/~yamadai/MERIT_DEM/
+             Conver      Convergence Index                                  1km   Current     Derived from SAGA GIS (http://saga-gis.org/) based
+                                                                                              on DEM data
+             PlanCurv    Plan Curvature                                     1km   Current     Derived from SAGA GIS based on DEM data
+             ProfCurv    Profile Curvature                                  1km   Current     Derived from SAGA GIS based on DEM data
+             SlopePosi   Relative Slope Position                            1km   Current     Derived from SAGA GIS based on DEM data
+             TWI         Topographic wetness index                          1km   Current     https://zenodo.org/record/1447210#.YvX4HtBByHs
+             Slope       Slope                       degrees                1km   Current     Derived from SAGA GIS based on DEM data
+             Landform    Land form classes                      USGS              Current     https://zenodo.org/record/1464846#.YoXUVOhBw2
+                                                                Global                        w
+                                                                Ecosyste
+                                                                m Map
+             Lithology   Lithology classes                      USGS              Current     https://zenodo.org/record/1464846#.YoXUVOhBw2
+                                                                Global                        w
+                                                                Ecosyste
+                                                                m Map
+Vegetation   LAImax      Leaf area index, monthly    unitless   GEOV2       1km   1999-2018
+                         maximum
+             Max Root    Max root depth              m          Fan         1km   current     https://wci.earth2observe.eu/thredds/catalog/usc/root-
+             Depth                                                                            depth/catalog.html
+             GPP         Gross primary production    gC/m2/yr   modis00_          2000-2015   http://files.ntsg.umt.edu/data/NTSG_Products/MOD1
+                                                                15                            7/GeoTIFF/MOD17A3/GeoTIFF_30arcsec/
+             NPP         Net primary production      gC/m2/yr   modis00_          2000-2015   same as above
+                                                                15
+             soilR       Soil respiration            gC/m2/yr   CMS_Gl      1km   1963-2011   https://daac.ornl.gov/CMS/guides/CMS_Global_Soil_
+                                                                obal_Soil                     Respiration.html
+                                                                _Respirat
+                                                                ion
+             Bare        Land use                    unitless   ESA_CCI     1km   1992–2020   https://essd.copernicus.org/articles/10/219/2018/
+             Crop        Land use                    unitless   ESA_CCI     1km   1992–2021   same as above
+             Grass       Land use                    unitless   ESA_CCI     1km   1992–2022   same as above
+             Tree        Land use                    unitless   ESA_CCI     1km   1992–2023   same as above
+ Table S3. Cross-validation metric for different parts of the fitted two-part models among different machine
+learning models.
+
+
+                                      AUC      Accuracy      Precision   Recall   F1-score
+ Classification   XGB                 0.99     0.939         0.945       0.951    0.948
+                  GradientBoosting    0.99     0.942         0.946       0.955    0.95
+                  RandomForest        0.98     0.936         0.938       0.952    0.945
+ Regression                           RMSE     R-squared
+                  XGB                 6.332    0.78
+                  GradientBoosting    6.173    0.79
+                  RandomForest        6.336    0.78
+Table S4. Comparison among global SIC maps.
+ Source         Method                           Depth   Data                    Co-variate        Resolution   Data
+                                                                                                                Characteristics
+ This study     Digital soil mapping: linking    2m      55,077 soil profiles;   More than 60:     30 seconds   Spatially
+                measured SIC content to                  223,593                 Climate,                       continuous;
+                spatially explicit data by               measurements            topography,                    Map unit: kg m-2
+                using the machine learning                                       lithology,
+                models (two-part models:                                         vegetation,
+                binary classification and                                        soil properties
+                regression model).                                               and
+                                                                                 anthropogenic
+                                                                                 activities
+ USDA-NRCS      Traditional          mapping     1m      Reclassification        No                2 minutes    Eight classes of
+                methods: based on a                      of the FAO-UNESCO                                      SIC      ranges;
+                reclassification of the FAO-             Soil Map of the                                        Map unit: kg m-2
+                UNESCO Soil Map of the                   World(88) combined
+                World combined with a soil               with a USDA-NRCS
+                climate map.                             soil climate map(89)
+
+ Batjes, 2016   Traditional          mapping     2m      Harmonized World                          30 seconds   Spatially
+ (WISE30sec)(   methods: based on soil type              Soil Database, minor    Köppen–                        continuous;
+ 76)            units that were derived using            corrections; 21,000     Geiger climate                 Map units:
+                taxonomy-based        transfer           soil profiles.          zones map as                   g kg-1
+                rules.                                                           categorical co-
+                                                                                 variate.
+Table S5. Country-level SIC budgets from literature compared with this study.
+
+ Name      Depth     Value   This study                       Reference
+                     (PgC)   Mean (one sigma range)
+ France    0-30cm    1.07    0.5(0.2-0.8)                     (90)
+ Cyprus    0-30cm    0.06    0.08(0.04-0.13)                  (91)
+ Indian    0-1m      13      23(9-37)                         (92)
+ UK        0-30cm    0.02    0.05(0.02-0.08)                  (93)
+ China     0-2m      135     172(78-265)                      (4)
+Table S6. Relative contributions of different climate zones to total soil inorganic carbon in three soil
+layers. Climate zones are classified based on aridity (Fig. S7)
+             0-0.3m   0.3-1m    1-2m   Area
+             (%)      (%)       (%)    (106 km2)
+ Hyperarid   23       18.5      18.3   12.9
+ Arid        28.3     25.8      24     20.1
+ Semiarid    23.4     27.3      26.9   29.3
+ Subhumid    8.2      10        10.5   16.5
+ Humid       17.1     18.4      20.3   87.2
+Table S7. Soil inorganic carbon (GtC) by soil orders.
+               0-0.3m    0.3-1m     1-2m       0-2m     Area (106 km2)
+
+ Aridisols     77.1      215.2      314.7      607.0    15.6
+ Entisols      78.4      208.8      317.7      605.0    23.5
+ Inceptisols   26.5      93.3       156.4      276.3    19.0
+ Mollisols     23.4      93.5       156.7      273.6    9.2
+ Gelisols      27.1      85.6       124.7      237.5    12.6
+ Alfisols      11.6      44.8       82.8       139.2    13.1
+ Vertisols     7.2       21.1       33.6       61.8     3.1
+ Oxisols       7.0       10.2       11.7       28.9     9.9
+ Spodosols     2.6       8.6        15.1       26.4     4.5
+ Ultisols      3.2       8.1        12.2       23.5     10.6
+ Histosols     2.3       7.8        11.8       22.0     1.6
+ Andisols      0.3       1.0        2.2        3.6      1.0
+Note: we report the sum of SIC from 12 orders classified by USGS Global Ecosystem Map (Lithology
+in Table S1) to facilitate comparison. Our observation databases have reported SIC from the rocky
+(N=233) and sandy (N=184) regions that are not within the area captured by 12 USGS orders. The
+extent of soils of our machine learning prediction was based on SoilGrids(58), with soils covering a
+larger area than the 12 USGS soil orders. Total SIC from our estimation (including from rocky and
+sandy lands) reaches 2580 GtC.
+Table S8. Total SIC storage (0-2m soil) by countries. Countries are ranked from high to low based on
+their SIC storage. Country borders are based on TM World Borders Dataset 0.3.
+           Country                            Mean       Lower      Upper
+                                              (GtC)      (2.5%)     (97.5%)
+ 1         Russia                             298        133        462
+ 2         United States                      189        87         292
+ 3         China                              185        84         285
+ 4         Canada                             170        77         262
+ 5         Australia                          160        61         258
+ 6         Saudi Arabia                       92         40         143
+ 7         Kazakhstan                         86         39         133
+ 8         Iran                               83         37         130
+ 9         Algeria                            79         35         123
+ 10        Argentina                          71         31         111
+ 11        Sudan                              53         22         85
+ 12        Mongolia                           47         21         74
+ 13        Libya                              47         19         75
+ 14        India                              45         18         72
+ 15        Mexico                             44         20         68
+ 16        Turkey                             33         15         51
+ 17        Egypt                              32         14         50
+ 18        Somalia                            28         13         43
+ 19        Mauritania                         27         11         43
+ 20        Pakistan                           27         12         41
+ 21        Niger                              26         9          42
+ 22        Chad                               26         10         41
+ 23        Mali                               25         10         40
+ 24        Democratic Republic of the Congo   25         10         39
+ 25        Iraq                               25         11         38
+ 26        Afghanistan                        22         10         35
+ 27        Spain                              22         10         34
+ 28        Ethiopia                           21         10         32
+ 29        Morocco                            20         9          31
+ 30        South Africa                       20         9          31
+Table S9. Fitted parameters from Equation S6 that quantify the relationship between pH and SIC.
+                            x0       k        a         b        c          RMSE
+                                                                            (g kg-1)
+              Overall       7.893    6.086    3.373     28.694   -5.156     0.720
+ Soil Order   Gelisols      7.977    6.183    5.433     46.048   -5.054     0.863
+              Histosols     7.984    6.305    4.869     39.001   -4.728     0.829
+              Spodosols     7.871    5.844    2.884     25.011   -5.524     0.797
+              Andisols      7.883    5.964    3.813     27.392   -4.159     0.424
+              Oxisols       7.874    7.553    3.909     32.086   -5.306     0.552
+              Vertisols     7.894    6.99     3.628     28.94    -4.762     0.674
+              Aridisols     7.913    6.557    5.838     48.271   -5.501     0.518
+              Ultisols      8.011    5.81     5.216     46.977   -5.127     0.656
+              Mollisols     8.038    4.876    5.539     48.087   -5.435     0.747
+              Alfisols      7.95     4.813    3.669     29.745   -4.888     0.808
+              Inceptisols   7.864    6.364    3.071     25.723   -5.205     0.631
+              Entisols      7.914    5.783    3.601     30.577   -5.207     0.763
+ Soil Depth   0-0.3m        7.646    6.489    0.891     7.068    -4.967     0.616
+              0.3-1m        7.928    6.111    3.792     33.179   -5.356     0.724
+              1-2m          7.902    6.29     3.597     31.133   -5.432     0.746
+ Vegetation   Grass         7.921    6.576    4.283     35.205   -4.979     0.745
+ Type         Tree          7.904    5.447    3.106     27.452   -5.351     0.744
+Table S10. SIC (0-0.3m soil) changes in response to pH resulting from future global warming and its
+altered hydrological cycles. Counties are ranked based on the magnitude of SIC changes (top 10
+countries) under three climate scenarios (SSP1-2.6, SSP2-4.5, SSP5-8.5). Negative values correspond
+to reductions in SIC and positive means increases.
+
+
+           Country       SSP5-8.5       Country       SSP2-     Country                 SSP1-
+                                                      4.5                               2.6
+ 1         Saudi         -2.69          Saudi         -1.03     India                   -0.55
+           Arabia                       Arabia
+ 2         India         -1.56          India         -0.74     Mali                    -0.26
+ 3         Australia     -0.89          Mali          -0.47     Australia               -0.24
+ 4         Sudan         -0.76          Chad          -0.43     Niger                   -0.23
+ 5         Chad          -0.64          Niger         -0.42     Chad                    -0.20
+ 6         Niger         -0.55          Argentina     -0.40     Sudan                   -0.14
+ 7         Iran          -0.55          Sudan         -0.37     Libya                   -0.14
+ 8         Mali          -0.49          Oman          -0.26     Pakistan                -0.12
+ 9         Oman          -0.46          United Arab   -0.25     United States           -0.10
+                                        Emirates
+ 10        Argentina     -0.41          Australia     -0.23     Mexico                  -0.09
+
+ 1         Russia        0.74           Russia        0.56      South Africa            0.23
+ 2         United        0.73           Spain         0.33      Spain                   0.18
+           States
+ 3         Spain         0.62           South         0.28      Russia                  0.17
+                                        Africa
+ 4         France        0.44           Turkey        0.18      France                  0.10
+ 5         Kazakhstan    0.40           France        0.15      Turkey                  0.08
+ 6         Canada        0.35           Ukraine       0.12      Algeria                 0.07
+ 7         Turkey        0.32           Algeria       0.11      Saudi Arabia            0.06
+ 8         Ukraine       0.31           Italy         0.11      Italy                   0.06
+ 9         Algeria       0.28           Botswana      0.10      Botswana                0.06
+ 10        South         0.27           Egypt         0.08      Somalia                 0.06
+           Africa
+Table S11. SIC (0-0.3m soil) losses over thirty years due to nitrogen addition (deposition +
+fertilization) induced acidification. Countries are ranked based on the magnitude of SIC losses from
+large to small under SSP5-8.5-Low-Ambition-N (high mineral N inputs) policy scenario.
+
+             Name                  SSP1-2.6-High-      SSP2-4.5-        SSP5-8.5-Low-
+                                   Ambition-N          Medium-          Ambition-N
+                                                       Ambition-N
+             India                 -1.2                -1.7             -3.3
+             China                 -1.6                -2.2             -3.2
+             United States         -1.3                -1.4             -1.8
+             Iran                  -0.5                -0.8             -1.6
+             Mexico                -0.4                -0.8             -1.3
+             Pakistan              -0.3                -0.5             -1.1
+             Turkey                -0.4                -0.5             -1.0
+             Spain                 -0.1                -0.3             -0.8
+             Australia             -0.4                -0.6             -0.8
+             Egypt                 -0.6                -0.7             -0.7
+             Turkmenistan          -0.1                -0.3             -0.6
+             Argentina             -0.5                -0.5             -0.6
+             Russia                -0.3                -0.4             -0.5
+             Oman                  -0.2                -0.2             -0.4
+             Uzbekistan            -0.1                -0.1             -0.4
+             Saudi Arabia          0.0                 0.0              -0.4
+             Ukraine               -0.3                -0.3             -0.4
+             France                -0.3                -0.3             -0.3
+             Sudan                 0.0                 -0.1             -0.3
+             Morocco               0.0                 -0.1             -0.3
+Table S12. Literature from which additional SIC data were extracted.
+
+1        Pihlap, E., Steffens, M., and Kogel-Knabner, I.: Initial soil aggregate formation and
+stabilisation in soils developed from calcareous loess, Geoderma, 385,
+10.1016/j.geoderma.2020.114854, 2021.
+2       Adoum, A. A., et al. (2017). "Pioneering assessment of carbon stocks in polder soils
+developed in inter-dune landscapes in a semiarid climate, Lake Chad." Comptes Rendus Geoscience
+349(1): 22-31.
+3      Aryal, D. R., et al. (2017). Soil Organic Carbon Stocks and Soil Respiration in Tropical
+Secondary Forests in Southern Mexico. Global Soil Security. D. J. Field, C. L. S. Morgan and A. B.
+McBratney: 153-165.
+4        Bhattacharjya, S., et al. (2017). "Comparative evaluation of three contrasting land use systems
+for soil carbon, microbial and biochemical indicators in North-Western Himalaya." Ecological
+Engineering 103: 21-30.
+5       Brombin, V., et al. (2020). "Soil Carbon Investigation in Three Pedoclimatic and Agronomic
+Settings of Northern Italy." Sustainability 12(24).
+6       Bughio, M. A., et al. (2017). "Neoformation of pedogenic carbonate and conservation of
+lithogenic carbonate by farming practices and their contribution to carbon sequestration in soil."
+Journal of Plant Nutrition and Soil Science 180(4): 454-463.
+7        Cardinael, R., et al. (2020). "Organic carbon decomposition rates with depth and contribution
+of inorganic carbon to CO2 emissions under a Mediterranean agroforestry system." European Journal
+of Soil Science 71(5): 909-923.
+8        Civeira, G. (2016). "Soil inorganic carbon in Pampean agroecosystems: distribution and
+relationships with soil properties in Buenos Aires province." Soil Research 54(7): 777-786.
+9       Conti, G., et al. (2014). "Large changes in carbon storage under different land-use regimes in
+subtropical seasonally dry forests of southern South America." Agriculture Ecosystems &
+Environment 197: 68-76.
+10       Das, R. and S. K. Maiti (2016). "Importance of carbon fractionation for the estimation of
+carbon sequestration in reclaimed coalmine soils-A case study from Jharia coalfields, Jharkhand,
+India." Ecological Engineering 90: 135-140.
+11       Dey, A., et al. (2020). "Effect of conservation agriculture on soil organic and inorganic
+carbon sequestration and lability: A study from a rice-wheat cropping system on a calcareous soil of
+the eastern Indo-Gangetic Plains." Soil Use and Management 36(3): 429-438.
+12      Etemadi, H., et al. (2018). "Forest migration and carbon sources to Iranian mangrove soils."
+Journal of Arid Environments 157: 57-65.
+13      Francos, M., et al. (2018). "Post-wildfire management effects on short-term evolution of soil
+properties (Catalonia, Spain, SW-Europe)." Science of the Total Environment 633: 285-292.
+14      Hou, C. C., et al. (2021). "Reclamation substantially increases soil organic and inorganic
+carbon stock in riparian floodplains." Journal of Soils and Sediments 21(2): 957-966.
+15      Hussain, S., et al. (2019). "Total organic and inorganic carbon in soils under different land
+use/land cover systems in the foothill Himalayas." Catena 182.
+16     Ibrahim, M. A. and R. Lal (2014). "Soil carbon and silicon pools across an un-drained
+toposequence in central Ohio." Catena 120: 57-63.
+17      Lan, Z. L., et al. (2021). "Long-term vegetation restoration increases deep soil carbon storage
+in the Northern Loess Plateau." Scientific Reports 11(1).
+18      Langner, A. N., et al. (2013). "Dynamic Soil Properties across a Suburban Landscape." Soil
+Science Society of America Journal 77(4): 1284-1293.
+19      Laudicina, V. A., et al. (2021). "Relief and calcium from gypsum as key factors for net
+inorganic carbon accumulation in soils of a semiarid Mediterranean environment." Geoderma 398.
+20     Loke, P. F., et al. (2021). "Cross-rangeland comparisons on soil carbon dynamics in the
+pedoderm of semi-arid and arid South African commercial farms." Geoderma 381.
+21     Mikhailova, E. A., et al. (2018). "Pedogenic Carbonates and Radiocarbon Isotopes of Organic
+Carbon at Depth in the Russian Chernozem." Geosciences 8(12).
+22     Obear, G. R. and D. J. Soldat (2016). "Soil Inorganic Carbon Accumulation in Sand Putting
+Green Soils: I. Field Relationships among Climate, Irrigation Water Quality, and Soil Properties."
+Crop Science 56(1): 452-462.
+23      Oso, V. and B. K. R. Rao (2017). "Land use conversion in humid tropics influences soil
+carbon stocks and forms." Journal of Soil Science and Plant Nutrition 17(2): 543-553.
+24       Otremba, K., et al. (2021). "Impact of alfalfa and NPK fertilization in agricultural reclamation
+on the transformation of Technosols in an area following lignite mining." Land Degradation &
+Development 32(3): 1179-1191.
+25      Pollmann, T., et al. (2021). "Young soils of a temperate barrier island under the impact of
+formation and resetting by tides and wind." Catena 202.
+26     Raheb, A., et al. (2016). "Storage of Organic and Inorganic Carbon in Arid-Semihumid Soils:
+A Case Study of the Rangelands of Northwestern Iran." Soil Science 181(11-12): 473-486.
+27     Raheb, A., et al. (2017). "Organic and inorganic carbon storage in soils along an arid to dry
+sub-humid climosequence in northwest of Iran." Catena 153: 66-74.
+28      Rahimi, S., et al. (2020). "Comparative Study of the Effects of Wildfire and Cultivation on
+Topsoil Properties in the Zagros Forest, Iran." Eurasian Soil Science 53(11): 1655-1668.
+29      Rodriguez, A. F., et al. (2021). "Soil carbon characterization in a subtropical drained
+peatland." Geoderma 382.
+30      Sarkhot, D. V., et al. (2012). "Total and available soil carbon fractions under the perennial
+grass Cynodon dactylon (L.) Pers and the bioenergy crop Arundo donax L." Biomass & Bioenergy
+41: 122-130.
+31      Sauer, T. J., et al. (2007). "Soil carbon and tree litter dynamics in a red cedar-scotch pine
+shelterbelt." Agroforestry Systems 71(3): 163-174.
+32      Sepahvand, H., et al. (2019). "Prediction of soil carbon levels in calcareous soils of Iran by
+mid-infrared reflectance spectroscopy." Environmental Pollutants and Bioavailability 31(1): 9-17.
+33     Sharififar, A., et al. (2019). "Lateral and Vertical Variations of Soil Organic and Inorganic
+Carbon Content in Aridisols and Entisols of a Rangeland." Eurasian Soil Science 52(9): 1051-1062.
+34      Sahrawat, K. L., et al. (2005). "Long-term lowland rice and arable cropping effects on carbon
+and nitrogen status of some semi-arid tropical soils." Current Science 89(12): 2159-2163.
+35      Tagiverdiev, S. S., et al. (2020). "The content and distribution of various forms of carbon in
+urban soils of southern Russia on the example of Rostov agglomeration." Geoderma Regional 21.
+36      Yapiyev, V., et al. (2018). "Top soil physical and chemical properties in Kazakhstan across a
+north-south gradient." Scientific Data 5.
+37       Zhang, G. L., et al. (2021). "Soil carbon storage and carbon sources under different Spartina
+alterniflora invasion periods in a salt marsh ecosystem." Catena 196.
+38       Lu, T., Wang, X. & Zhang, W. Total and dissolved soil organic and inorganic carbon and
+their relationships in typical loess cropland of Fengu Basin. Geosci. Lett. 7, 17 (2020).
+39       Tong, L. S., Fang, N. F., Xiao, H. B. & Shi, Z. H. Sediment deposition changes the
+relationship between soil organic and inorganic carbon: Evidence from the Chinese Loess Plateau.
+Agric. Ecosyst. Environ. 302, 107076 (2020).
+40      Wang, Y. et al. Spatial variability of soil carbon and water storage across loess deposit
+catenas in China’s Loess Plateau region. Can. J. Soil Sci. 100, 263–277 (2020).
+41      Yan, M., Fan, L. & Wang, L. Restoration of soil carbon with different tree species in a post-
+mining land in eastern Loess Plateau, China. Ecol. Eng. 158, 106025 (2020).
+42      Yu, X. et al. Effects of land use and cultivation time on soil organic and inorganic carbon
+storage in deep soils. J. Geogr. Sci. 30, 921–934 (2020).
+43     Zhang, W., Wang, X., Lu, T., Shi, H. & Zhao, Y. Influences of soil properties and
+hydrological processes on soil carbon dynamics in the cropland of North China Plain. Agric. Ecosyst.
+Environ. 295, 106886 (2020).
+44      Yang, R. & Yang, F. Impacts of Spartina alterniflora invasion on soil inorganic carbon in
+coastal wetlands in China. Soil Sci. Soc. Am. J. 84, 844–855 (2020).
+45      Dong, X., Sun, H., Wang, J., Liu, X. & Singh, B. P. Wheat-derived soil organic carbon
+accumulates more than its maize counterpart in a wheat-maize cropping system after 21 years. Eur. J.
+Soil Sci. 71, 695–705 (2020).
+46      Du, C. & Gao, Y. Opposite patterns of soil organic and inorganic carbon along a climate
+gradient in the alpine steppe of northern Tibetan Plateau. CATENA 186, 104366 (2020).
+References and Notes
+1. W. H. Schlesinger, The formation of caliche in soils of the Mojave-Desert, California.
+       Geochim. Cosmochim. Acta 49, 57–66 (1985). doi:10.1016/0016-7037(85)90191-7
+2. W. H. Schlesinger, Carbon storage in the caliche of arid soils - A case-study from Arizona.
+       Soil Sci. 133, 247–255 (1982). doi:10.1097/00010694-198204000-00008
+3. J. H. Kim, E. G. Jobbágy, D. D. Richter, S. E. Trumbore, R. B. Jackson, Agricultural
+         acceleration of soil carbonate weathering. Glob. Chang. Biol. 26, 5988–6002 (2020).
+         doi:10.1111/gcb.15207 Medline
+4. X. D. Song, F. Yang, H.-Y. Wu, J. Zhang, D.-C. Li, F. Liu, Y.-G. Zhao, J.-L. Yang, B. Ju, C.-
+       F. Cai, B. Huang, H.-Y. Long, Y. Lu, Y.-Y. Sui, Q.-B. Wang, K.-N. Wu, F.-R. Zhang,
+       M.-K. Zhang, Z. Shi, W.-Z. Ma, G. Xin, Z.-P. Qi, Q.-R. Chang, E. Ci, D.-G. Yuan, Y.-Z.
+       Zhang, J.-P. Bai, J.-Y. Chen, J. Chen, Y.-J. Chen, Y.-Z. Dong, C.-L. Han, L. Li, L.-M.
+       Liu, J.-J. Pan, F.-P. Song, F.-J. Sun, D.-F. Wang, T.-W. Wang, X.-H. Wei, H.-Q. Wu, X.
+       Zhao, Q. Zhou, G.-L. Zhang, Significant loss of soil inorganic carbon at the continental
+       scale. Natl. Sci. Rev. 9, nwab120 (2022). doi:10.1093/nsr/nwab120 Medline
+5. A. G. Lapenis, G. B. Lawrence, S. W. Bailey, B. F. Aparin, A. I. Shiklomanov, N. A.
+       Speranskaya, M. S. Torn, M. Calef, Climatically driven loss of calcium in steppe soil as a
+       sink for atmospheric carbon. Global Biogeochem. Cycles 22, GB2020 (2008).
+       doi:10.1029/2007GB003077
+6. P. A. Raymond, J. J. Cole, Increase in the export of alkalinity from North America’s largest
+        river. Science 301, 88–91 (2003). doi:10.1126/science.1083788 Medline
+7. T. W. Drake, S. E. Tank, A. V. Zhulidov, R. M. Holmes, T. Gurtovaya, R. G. M. Spencer,
+       Increasing Alkalinity Export from Large Russian Arctic Rivers. Environ. Sci. Technol.
+       52, 8302–8308 (2018). doi:10.1021/acs.est.8b01051 Medline
+8. P. A. Raymond, S. K. Hamilton, Anthropogenic influences on riverine fluxes of dissolved
+        inorganic carbon to the oceans. Limnol. Oceanogr. Lett. 3, 143–155 (2018).
+        doi:10.1002/lol2.10069
+9. Y. Li, Y. G. Wang, R. A. Houghton, L. S. Tang, Hidden carbon sink beneath desert. Geophys.
+        Res. Lett. 42, 5880–5887 (2015). doi:10.1002/2015GL064222
+10. M. Klaus, Decadal increase in groundwater inorganic carbon concentrations across Sweden.
+       Commun. Earth Environ. 4, 221 (2023). doi:10.1038/s43247-023-00885-4
+11. M. C. Rowley, S. Grand, E. P. Verrecchia, Calcium-mediated stabilisation of soil organic
+       carbon. Biogeochemistry 137, 27–49 (2018). doi:10.1007/s10533-017-0410-1
+12. M. C. Duniway, J. E. Herrick, H. C. Monger, Spatial and temporal variability of plant-
+       available water in calcium carbonate-cemented soils and consequences for arid ecosystem
+       resilience. Oecologia 163, 215–226 (2010). doi:10.1007/s00442-009-1530-7 Medline
+13. K. L. Page, D. E. Allen, R. C. Dalal, W. Slattery, Processes and magnitude of CO2, CH4, and
+       N2O fluxes from liming of Australian acidic soils: A review. Soil Res. 47, 747–762
+       (2009). doi:10.1071/SR09057
+14. S. Tunesi, V. Poggi, C. Gessa, Phosphate adsorption and precipitation in calcareous soils:
+        The role of calcium ions in solution and carbonate minerals. Nutr. Cycl. Agroecosyst. 53,
+        219–227 (1999). doi:10.1023/A:1009709005147
+15. F. Tao, B. Z. Houlton, Inorganic and organic synergies in enhanced weathering to promote
+        carbon dioxide removal. Glob. Chang. Biol. 30, e17132 (2024). doi:10.1111/gcb.17132
+        Medline
+16. G. R. Groshans, E. A. Mikhailova, C. J. Post, M. A. Schlautman, Accounting for soil
+       inorganic carbon in the ecosystem services framework for United Nations sustainable
+       development goals. Geoderma 324, 37–46 (2018). doi:10.1016/j.geoderma.2018.02.009
+17. K. Zamanian, K. Pustovoytov, Y. Kuzyakov, Pedogenic carbonates: Forms and formation
+       processes. Earth Sci. Rev. 157, 1–17 (2016). doi:10.1016/j.earscirev.2016.03.003
+18. H. C. Monger, R. A. Kraimer, S. Khresat, D. R. Cole, X. Wang, J. Wang, Sequestration of
+       inorganic carbon in soil and groundwater. Geology 43, 375–378 (2015).
+       doi:10.1130/G36449.1
+19. P. Friedlingstein, M. W. Jones, M. O’Sullivan, R. M. Andrew, D. C. E. Bakker, J. Hauck, C.
+        Le Quéré, G. P. Peters, W. Peters, J. Pongratz, S. Sitch, J. G. Canadell, P. Ciais, R. B.
+        Jackson, S. R. Alin, P. Anthoni, N. R. Bates, M. Becker, N. Bellouin, L. Bopp, T. T. T.
+        Chau, F. Chevallier, L. P. Chini, M. Cronin, K. I. Currie, B. Decharme, L. M.
+        Djeutchouang, X. Dou, W. Evans, R. A. Feely, L. Feng, T. Gasser, D. Gilfillan, T.
+        Gkritzalis, G. Grassi, L. Gregor, N. Gruber, Ö. Gürses, I. Harris, R. A. Houghton, G. C.
+        Hurtt, Y. Iida, T. Ilyina, I. T. Luijkx, A. Jain, S. D. Jones, E. Kato, D. Kennedy, K. Klein
+        Goldewijk, J. Knauer, J. I. Korsbakken, A. Körtzinger, P. Landschützer, S. K. Lauvset,
+        N. Lefèvre, S. Lienert, J. Liu, G. Marland, P. C. McGuire, J. R. Melton, D. R. Munro, J.
+        E. M. S. Nabel, S.-I. Nakaoka, Y. Niwa, T. Ono, D. Pierrot, B. Poulter, G. Rehder, L.
+        Resplandy, E. Robertson, C. Rödenbeck, T. M. Rosan, J. Schwinger, C. Schwingshackl,
+        R. Séférian, A. J. Sutton, C. Sweeney, T. Tanhua, P. P. Tans, H. Tian, B. Tilbrook, F.
+        Tubiello, G. R. van der Werf, N. Vuichard, C. Wada, R. Wanninkhof, A. J. Watson, D.
+        Willis, A. J. Wiltshire, W. Yuan, C. Yue, X. Yue, S. Zaehle, J. Zeng, Global Carbon
+        Budget 2021. Earth Syst. Sci. Data 14, 1917–2005 (2022). doi:10.5194/essd-14-1917-
+        2022
+20. W. G. Sombroek, F. O. Nachtergaele, A. Hebel, Amounts, dynamics and sequestering of
+       carbon in tropical and subtropical soils. Ambio 22, 417–426 (1993).
+21. N. H. Batjes, Total carbon and nitrogen in the soils of the world. Eur. J. Soil Sci. 47, 151–163
+       (1996). doi:10.1111/j.1365-2389.1996.tb01386.x
+22. R. Lal, J. M. Kimble, B. H. Stewart, H. Eswaran, “Global carbon stocks” in Global climate
+        change and pedogenic carbonates (Lewis Publishers, 1999) pp. 15–27.
+23. C. Plaza, C. Zaccone, K. Sawicka, A. M. Méndez, A. Tarquis, G. Gascó, G. B. M.
+        Heuvelink, E. A. G. Schuur, F. T. Maestre, Soil resources and element stocks in drylands
+        to face global issues. Sci. Rep. 8, 13788 (2018). doi:10.1038/s41598-018-32229-0
+        Medline
+24. S. M. Lundberg, S. I. Lee, in 31st Annual Conference on Neural Information Processing
+       Systems (NIPS). (Long Beach, CA, 2017), vol. 30.
+25. E. W. Slessarev, Y. Lin, N. L. Bingham, J. E. Johnson, Y. Dai, J. P. Schimel, O. A.
+       Chadwick, Water balance creates a threshold in soil pH at the global scale. Nature 540,
+       567–569 (2016). doi:10.1038/nature20139 Medline
+26. K. Zamanian, M. Zarebanadkouki, Y. Kuzyakov, Nitrogen fertilization raises CO2 efflux
+       from inorganic carbon: A global assessment. Glob. Chang. Biol. 24, 2810–2817 (2018).
+       doi:10.1111/gcb.14148 Medline
+27. S. Raza, K. Zamanian, S. Ullah, Y. Kuzyakov, I. Virto, J. Zhou, Inorganic carbon losses by
+        soil acidification jeopardize global efforts on carbon sequestration and climate change
+        mitigation. J. Clean. Prod. 315, 128036 (2021). doi:10.1016/j.jclepro.2021.128036
+28. B. C. O’Neill, C. Tebaldi, D. P. van Vuuren, V. Eyring, P. Friedlingstein, G. Hurtt, R. Knutti,
+        E. Kriegler, J.-F. Lamarque, J. Lowe, G. A. Meehl, R. Moss, K. Riahi, B. M. Sanderson,
+        The Scenario Model Intercomparison Project (ScenarioMIP) for CMIP6. Geosci. Model
+        Dev. 9, 3461–3482 (2016). doi:10.5194/gmd-9-3461-2016
+29. W. H. Schlesinger, An evaluation of abiotic carbon sinks in deserts. Glob. Chang. Biol. 23,
+       25–27 (2017). doi:10.1111/gcb.13336 Medline
+30. T. O. West, A. C. McBride, The contribution of agricultural lime to carbon dioxide emissions
+        in the United States: Dissolution, transport, and net emissions. Agric. Ecosyst. Environ.
+        108, 145–154 (2005). doi:10.1016/j.agee.2005.01.002
+31. S. K. Hamilton, A. L. Kurzman, C. Arango, L. X. Jin, G. P. Robertson, Evidence for carbon
+        sequestration by agricultural liming. Global Biogeochem. Cycles 21, GB2021 (2007).
+        doi:10.1029/2006GB002738
+32. R. Lal, C. Monger, L. Nave, P. Smith, The role of soil in regulation of climate. Philos. Trans.
+        R. Soc. Lond. B Biol. Sci. 376, 20210084 (2021). doi:10.1098/rstb.2021.0084 Medline
+33. R. Lauerwald, P. Regnier, B. Guenet, P. Friedlingstein, P. Ciais, How Simulations of the
+        Land Carbon Sink Are Biased by Ignoring Fluvial Carbon Transfers: A Case Study for
+        the Amazon Basin. One Earth 3, 226–236 (2020). doi:10.1016/j.oneear.2020.07.009
+34. N. H. Oh, P. A. Raymond, Contribution of agricultural liming to riverine bicarbonate export
+       and CO2 sequestration in the Ohio River basin. Global Biogeochem. Cycles 20,
+       2005GB002565 (2006). doi:10.1029/2005GB002565
+35. K. Semhi, P. A. Suchet, N. Clauer, J. L. Probst, Impact of nitrogen fertilizers on the natural
+        weathering-erosion processes and fluvial transport in the Garonne basin. Appl. Geochem.
+        15, 865–878 (2000). doi:10.1016/S0883-2927(99)00076-1
+36. T. J. Kessler, C. F. Harvey, The global flux of carbon dioxide into groundwater. Geophys.
+        Res. Lett. 28, 279–282 (2001). doi:10.1029/2000GL011505
+37. P. Regnier, L. Resplandy, R. G. Najjar, P. Ciais, The land-to-ocean loops of the global
+        carbon cycle. Nature 603, 401–410 (2022). doi:10.1038/s41586-021-04339-9 Medline
+38. A. Naorem, S. Jayaraman, R. C. Dalal, A. Patra, C. S. Rao, R. Lal, Soil Inorganic Carbon as
+       a Potential Sink in Carbon Storage in Dryland Soils—A Review. Agriculture 12, 1256
+       (2022). doi:10.3390/agriculture12081256
+39. C. H. Zhang, Y. Y. Sun, G. Y. Tang, F. Y. Liu, Contributions of Carbonates to Carbon
+       Dioxide Release From a Calcareous Soil in Response to Experimental Warming. Soil Sci.
+       184, 52–59 (2019). doi:10.1097/SS.0000000000000251
+40. G. M. Marion, W. H. Schlesinger, P. J. Fonteyn, CALDEP -A regional model for soil CaCO3
+       (caliche) deposition in southwestern deserts. Soil Sci. 139, 468–481 (1985).
+       doi:10.1097/00010694-198505000-00014
+41. J. Ferdush, V. Paul, A review on the possible factors influencing soil inorganic carbon under
+        elevated CO2. Catena 204, 105434 (2021). doi:10.1016/j.catena.2021.105434
+42. Y. G. Wang, J. Jiang, Z. Niu, Y. Li, C. Li, W. Feng, Responses of soil organic and inorganic
+       carbon vary at different soil depths after long-term agricultural cultivation in Northwest
+       China. Land Degrad. Dev. 30, 1229–1242 (2019). doi:10.1002/ldr.3311
+43. D. J. Beerling, E. P. Kantzas, M. R. Lomas, P. Wade, R. M. Eufrasio, P. Renforth, B. Sarkar,
+        M. G. Andrews, R. H. James, C. R. Pearce, J.-F. Mercure, H. Pollitt, P. B. Holden, N. R.
+        Edwards, M. Khanna, L. Koh, S. Quegan, N. F. Pidgeon, I. A. Janssens, J. Hansen, S. A.
+        Banwart, Potential for large-scale CO2 removal via enhanced rock weathering with
+        croplands. Nature 583, 242–248 (2020). doi:10.1038/s41586-020-2448-9 Medline
+44. J. G. Canadell, P. M. S. Monteiro, M. H. Costa, L. Cotrim da Cunha, P. M. Cox, A. V.
+        Eliseev, S. Henson, M. Ishii, S. Jaccard, C. Koven, A. Lohila, P. K. Patra, S. Piao, J.
+        Rogelj, S. Syampungani, S. Zaehle, K. Zickfeld, Climate Change 2021: The Physical
+        Science Basis. Contribution of Working Group I to the Sixth Assessment Report of the
+        Intergovernmental Panel on Climate Change, V. Masson-Delmotte, P. Zhai, A. Pirani, S.
+        L. Connors, C. Péan, S. Berger, N. Caud, Y. Chen, L. Goldfarb, M. I. Gomis, M. Huang,
+        K. Leitzell, E. Lonnoy, J. B. R. Matthews, T. K. Maycock, T. Waterfield, O. Yelekçi, R.
+        Yu, B. Zhou, Eds. (Cambridge Univ. Press, 2021), pp. 673–816.
+45. J. Sanderman, Can management induced changes in the carbonate system drive soil carbon
+        sequestration? A review with particular focus on Australia. Agric. Ecosyst. Environ. 155,
+        70–77 (2012). doi:10.1016/j.agee.2012.04.015
+46. Z. A. Sun, F. Q. Meng, B. Zhu, Influencing factors and partitioning methods of carbonate
+        contribution to CO2 emissions from calcareous soils. Soil Ecol. Lett. 5, 6–20 (2023).
+        doi:10.1007/s42832-022-0139-1
+47. M. Nakhavali, R. Lauerwald, P. Regnier, B. Guenet, S. Chadburn, P. Friedlingstein,
+       Leaching of dissolved organic carbon from mineral soils plays a significant role in the
+       terrestrial carbon balance. Glob. Chang. Biol. 27, 1083–1096 (2021).
+       doi:10.1111/gcb.15460 Medline
+48. P. Regnier, P. Friedlingstein, P. Ciais, F. T. Mackenzie, N. Gruber, I. A. Janssens, G. G.
+        Laruelle, R. Lauerwald, S. Luyssaert, A. J. Andersson, S. Arndt, C. Arnosti, A. V.
+        Borges, A. W. Dale, A. Gallego-Sala, Y. Goddéris, N. Goossens, J. Hartmann, C. Heinze,
+        T. Ilyina, F. Joos, D. E. LaRowe, J. Leifeld, F. J. R. Meysman, G. Munhoven, P. A.
+        Raymond, R. Spahni, P. Suntharalingam, M. Thullner, Anthropogenic perturbation of the
+        carbon fluxes from land to ocean. Nat. Geosci. 6, 597–607 (2013). doi:10.1038/ngeo1830
+49. J. N. Quinton, G. Govers, K. Van Oost, R. D. Bardgett, The impact of agricultural soil
+        erosion on biogeochemical cycling. Nat. Geosci. 3, 311–314 (2010).
+        doi:10.1038/ngeo838
+50. D. W. Yang, S. Kanae, T. Oki, T. Koike, K. Musiake, Global potential soil erosion with
+       reference to land use and climate changes. Hydrol. Processes 17, 2913–2928 (2003).
+       doi:10.1002/hyp.1441
+51. N. H. Batjes, E. Ribeiro, A. van Oostrum, Standardised soil profile data to support global
+       mapping and modelling (WoSIS snapshot 2019). Earth Syst. Sci. Data 12, 299–320
+       (2020). doi:10.5194/essd-12-299-2020
+52. S. B. Hong, A. P. Chen, Contrasting Responses of Soil Inorganic Carbon to Afforestation in
+        Acidic Versus Alkaline Soils. Global Biogeochem. Cycles 36, e2021GB007038 (2022).
+        doi:10.1029/2021GB007038
+53. R. Mirzaeitalarposhti, M. S. Demyan, F. Rasche, G. Cadisch, T. Muller, Mid-infrared
+       spectroscopy to support regional-scale digital soil mapping on selected croplands of
+       South-West Germany. Catena 149, 283–293 (2017). doi:10.1016/j.catena.2016.10.001
+54. H. Elbasiouny, M. Abowaly, A. Abu Alkheir, A. Gad, Spatial variation of soil carbon and
+       nitrogen pools by using ordinary Kriging method in an area of north Nile Delta, Egypt.
+       Catena 113, 70–78 (2014). doi:10.1016/j.catena.2013.09.008
+55. A. Sharififar, B. Minasny, D. Arrouays, L. Boulonne, T. Chevallier, P. van Deventer, D. J.
+        Field, C. Gomez, H.-J. Jang, S.-H. Jeon, J. Koch, A. B. McBratney, B. P. Malone, B. P.
+        Marchant, M. P. Martin, C. Monger, J.-L. Munera-Echeverri, J. Padarian, M. Pfeiffer, A.
+        C. Richer-de-Forges, N. P. A. Saby, K. Singh, X.-D. Song, K. Zamanian, G.-L. Zhang, G.
+        van Zijl, Advances in Agronomy, vol. 178, D. L. Sparks, Ed. (Academic Press, 2023),
+        chap. 4.
+56. T. Hengl, Global DEM derivatives at 250 m, 1 km and 2 km based on the MERIT DEM
+        (1.0), Zenodo (2018); https://doi.org/10.5281/zenodo.1447210.
+57. W. Li, N. MacBean, P. Ciais, P. Defourny, C. Lamarche, S. Bontemps, R. A. Houghton, S.
+       Peng, Gross and net land cover changes in the main plant functional types derived from
+       the annual ESA CCI land cover maps (1992-2015). Earth Syst. Sci. Data 10, 219–234
+       (2018). doi:10.5194/essd-10-219-2018
+58. T. Hengl, J. Mendes de Jesus, G. B. M. Heuvelink, M. Ruiperez Gonzalez, M. Kilibarda, A.
+        Blagotić, W. Shangguan, M. N. Wright, X. Geng, B. Bauer-Marschallinger, M. A.
+        Guevara, R. Vargas, R. A. MacMillan, N. H. Batjes, J. G. B. Leenaars, E. Ribeiro, I.
+        Wheeler, S. Mantel, B. Kempen, SoilGrids250m: Global gridded soil information based
+        on machine learning. PLOS ONE 12, e0169748 (2017).
+        doi:10.1371/journal.pone.0169748 Medline
+59. A. A. Afifi, J. B. Kotlerman, S. L. Ettner, M. Cowan, Methods for improving regression
+       analysis for skewed continuous or counted responses. Annu. Rev. Public Health 28, 95–
+       111 (2007). doi:10.1146/annurev.publhealth.28.082206.094100 Medline
+60. D. S. Tian, S. L. Niu, A global analysis of soil acidification caused by nitrogen addition.
+       Environ. Res. Lett. 10, 024019 (2015). doi:10.1088/1748-9326/10/2/024019
+61. R. A. Feely, C. L. Sabine, K. Lee, W. Berelson, J. Kleypas, V. J. Fabry, F. J. Millero, Impact
+       of anthropogenic CO2 on the CaCO3 system in the oceans. Science 305, 362–366 (2004).
+       doi:10.1126/science.1097329 Medline
+62. C. R. Schwalm, S. Glendon, P. B. Duffy, RCP8.5 tracks cumulative CO2 emissions. Proc.
+       Natl. Acad. Sci. U.S.A. 117, 19656–19657 (2020). doi:10.1073/pnas.2007117117 Medline
+63. J. Tao, S. Raza, M. Zhao, J. Cui, P. Wang, Y. Sui, K. Zamanian, Y. Kuzyakov, M. Xu, Z.
+        Chen, J. Zhou, Vulnerability and driving factors of soil inorganic carbon stocks in
+        Chinese croplands. Sci. Total Environ. 825, 154087 (2022).
+        doi:10.1016/j.scitotenv.2022.154087 Medline
+64. J. H. Guo, X. J. Liu, Y. Zhang, J. L. Shen, W. X. Han, W. F. Zhang, P. Christie, K. W. T.
+        Goulding, P. M. Vitousek, F. S. Zhang, Significant acidification in major Chinese
+        croplands. Science 327, 1008–1010 (2010). doi:10.1126/science.1182570 Medline
+65. J. Chang, P. Havlík, D. Leclère, W. de Vries, H. Valin, A. Deppermann, T. Hasegawa, M.
+        Obersteiner, Reconciling regional nitrogen boundaries with global food security. Nat.
+        Food 2, 700–711 (2021). doi:10.1038/s43016-021-00366-x Medline
+66. D. R. Kanter, W. Winiwarter, B. L. Bodirsky, L. Bouwman, E. Boyer, S. Buckle, J. E.
+       Compton, T. Dalgaard, W. de Vries, D. Leclère, A. Leip, C. Müller, A. Popp, N.
+       Raghuram, S. Rao, M. A. Sutton, H. Tian, H. Westhoek, X. Zhang, M. Zurek, Nitrogen
+       futures in the shared socioeconomic pathways 4. Glob. Environ. Change 61, 102029
+       (2020). doi:10.1016/j.gloenvcha.2019.102029 Medline
+67. T. W. Drake, P. A. Raymond, R. G. M. Spencer, Terrestrial carbon inputs to inland waters: A
+       current synthesis of estimates and uncertainty. Limnol. Oceanogr. Lett. 3, 132–142
+       (2018). doi:10.1002/lol2.10055
+68. L. J. Tranvik, J. A. Downing, J. B. Cotner, S. A. Loiselle, R. G. Striegl, T. J. Ballatore, P.
+        Dillon, K. Finlay, K. Fortino, L. B. Knoll, P. L. Kortelainen, T. Kutser, S. Larsen, I.
+        Laurion, D. M. Leech, S. L. McCallister, D. M. McKnight, J. M. Melack, E. Overholt, J.
+        A. Porter, Y. Prairie, W. H. Renwick, F. Roland, B. S. Sherman, D. W. Schindler, S.
+        Sobek, A. Tremblay, M. J. Vanni, A. M. Verschoor, E. von Wachenfeldt, G. A.
+        Weyhenmeyer, Lakes and reservoirs as regulators of carbon cycling and climate. Limnol.
+        Oceanogr. 54, 2298–2314 (2009). doi:10.4319/lo.2009.54.6_part_2.2298
+69. M. X. Li, C. Peng, M. Wang, W. Xue, K. Zhang, K. Wang, G. Shi, Q. Zhu, The carbon flux
+       of global rivers: A re-evaluation of amount and spatial patterns. Ecol. Indic. 80, 40–51
+       (2017). doi:10.1016/j.ecolind.2017.04.049
+70. J. Hartmann, N. Jansen, H. H. Durr, S. Kempe, P. Kohler, Global CO2-consumption by
+        chemical weathering: What is the contribution of highly active weathering regions?
+        Global Planet. Change 69, 185–194 (2009). doi:10.1016/j.gloplacha.2009.07.007
+71. W. H. Schlesinger, J. M. Melack, Transport of organic carbon in the world’s rivers. Tellus
+       33, 172–187 (1981).
+72. R. Mendonça, R. A. Müller, D. Clow, C. Verpoorter, P. Raymond, L. J. Tranvik, S. Sobek,
+       Organic carbon burial in global lakes and reservoirs. Nat. Commun. 8, 1694 (2017).
+       doi:10.1038/s41467-017-01789-6 Medline
+73. L. Fang, Y. Y. Wu, Bicarbonate uptake experiment show potential karst carbon sinks
+        transformation into carbon sequestration by terrestrial higher plants. J. Plant Interact. 17,
+        419–426 (2022). doi:10.1080/17429145.2022.2045369
+74. Z. H. Liu, W. Dreybrodt, Significance of the carbon sink produced by H2O-carbonate-CO2-
+        aquatic phototroph interaction on land. Sci. Bull. 60, 182–191 (2015).
+        doi:10.1007/s11434-014-0682-y
+75. Z. H. Liu, W. Dreybrodt, H. J. Wang, A new direction in effective accounting for the
+        atmospheric CO2 budget: Considering the combined action of carbonate dissolution, the
+        global water cycle and photosynthetic uptake of DIC by aquatic organisms. Earth Sci.
+        Rev. 99, 162–172 (2010). doi:10.1016/j.earscirev.2010.03.001
+76. N. H. Batjes, Harmonized soil property values for broad-scale modelling (WISE30sec) with
+       estimates of global soil carbon stocks. Geoderma 269, 61–68 (2016).
+       doi:10.1016/j.geoderma.2016.01.034
+77. N. Goldscheider, Z. Chen, A. S. Auler, M. Bakalowicz, S. Broda, D. Drew, J. Hartmann, G.
+       Jiang, N. Moosdorf, Z. Stevanovic, G. Veni, Global distribution of carbonate rocks and
+       karst water resources. Hydrogeol. J. 28, 1661–1677 (2020). doi:10.1007/s10040-020-
+       02139-5
+78. J. F. Kok, A. A. Adebiyi, S. Albani, Y. Balkanski, R. Checa-Garcia, M. Chin, P. R. Colarco,
+        D. S. Hamilton, Y. Huang, A. Ito, M. Klose, D. M. Leung, L. Li, N. M. Mahowald, R. L.
+        Miller, V. Obiso, C. P. García-Pando, A. Rocha-Lima, J. S. Wan, C. A. Whicker,
+        Improved representation of the global dust cycle using observational constraints on dust
+        properties and abundance. Atmos. Chem. Phys. 21, 8127–8167 (2021). doi:10.5194/acp-
+        21-8127-2021 Medline
+79. H. E. Beck, N. E. Zimmermann, T. R. McVicar, N. Vergopolan, A. Berg, E. F. Wood,
+       Present and future Köppen-Geiger climate classification maps at 1-km resolution. Sci.
+       Data 5, 180214 (2018). doi:10.1038/sdata.2018.214 Medline
+80. D. Eremina, G. Selyukova, S. Selyukiva, in International scientific and practical conference
+       “AgroSMART - Smart solutions for agriculture” (AgroSMART 2018). (Atlantis Press,
+       2018).
+81. D. A. Gavrilov, S. V. Loiko, N. V. Klimova, Holocene Soil Evolution in South Siberia Based
+       on Phytolith Records and Genetic Soil Analysis (Russia). Geosciences (Basel) 8, 402
+       (2018). doi:10.3390/geosciences8110402
+82. R. V. Desyatkin, S. N. Lessovaia, M. V. Okoneshnikova, A. Z. Ivanova, Cryosols from
+       Tundra and Taiga Zones of Yakutia: Properties, Clay Mineralogy, and Problems of
+       Classification. Eurasian Soil Sci. 54, 1783–1794 (2021).
+       doi:10.1134/S1064229321120048
+83. L. V. Pomazkina, E. V. Lubnina, S. Y. Zorina, L. G. Kotova, Dynamics of CO2 evolution in
+        grey forest soil of the Baikal forest-steppe. Biol. Fertil. Soils 23, 327–331 (1996).
+        doi:10.1007/BF00335962
+84. V. Stolbovoi, “Soils of Russia: Correlated with the Revised Legend of the FAO Soil Map of
+        the World and World Reference Base for Soil Resources” (RR-00-013, IIASA, 2000).
+85. G. Romero-Mujalli, J. Hartmann, J. Borker, Temperature and CO2 dependency of global
+       carbonate weathering fluxes - Implications for future carbonate weathering research.
+       Chem. Geol. 527, 118874 (2019). doi:10.1016/j.chemgeo.2018.08.010
+86. H. Q. Tian, J. Yang, C. Lu, R. Xu, J. G. Canadell, R. B. Jackson, A. Arneth, J. Chang, G.
+       Chen, P. Ciais, S. Gerber, A. Ito, Y. Huang, F. Joos, S. Lienert, P. Messina, S. Olin, S.
+       Pan, C. Peng, E. Saikawa, R. L. Thompson, N. Vuichard, W. Winiwarter, S. Zaehle, B.
+       Zhang, K. Zhang, Q. Zhu, The global N2O model intercomparison project. Bull. Am.
+       Meteorol. Soc. 99, 1231–1251 (2018). doi:10.1175/BAMS-D-17-0212.1
+87. R. Wang, Y. Balkanski, O. Boucher, P. Ciais, J. Peñuelas, S. Tao, Significant contribution of
+       combustion-related emissions to the atmospheric phosphorus budget. Nat. Geosci. 8, 48–
+       54 (2015). doi:10.1038/ngeo2324
+88. FAO/UNESCO, Soil map of the world: Revised legend with corrections and updates (FAO,
+      1991).
+89. H. Eswaran et al., “Global carbon stocks” in Global climate change and pedogenic
+       carbonates, R. Lal, J. M. Kimble, B. A. Stewart, H. Eswaran, Eds. (Lewis Publishers,
+       2000), pp. 15–27.
+90. B. P. Marchant, E. J. Villanneau, D. Arrouays, N. P. A. Saby, B. G. Rawlins, Quantifying
+        and mapping topsoil inorganic carbon concentrations and stocks: Approaches tested in
+        France. Soil Use Manage. 31, 29–38 (2015). doi:10.1111/sum.12158
+91. A. M. Zissimos, I. C. Christoforou, D. R. Cohen, S. D. Mooney, N. F. Rutherford, Spatial
+       distribution and controls on organic and inorganic carbon in the soils of Cyprus. J.
+       Geochem. Explor. 196, 95–104 (2019). doi:10.1016/j.gexplo.2018.10.005
+92. K. Sreenivas, V. K. Dadhwal, S. Kumar, G. S. Harsha, T. Mitran, G. Sujatha, G. J. R. Suresh,
+        M. A. Fyzee, T. Ravisankar, Digital mapping of soil organic and inorganic carbon status
+        in India. Geoderma 269, 160–173 (2016). doi:10.1016/j.geoderma.2016.02.002
+93. B. G. Rawlins, P. Henrys, N. Breward, D. A. Robinson, A. M. Keith, M. Garcia-Bajo, The
+       importance of inorganic carbon in soil carbon databases and stock estimates: A case
+       study from England. Soil Use Manage. 27, 312–320 (2011). doi:10.1111/j.1475-
+       2743.2011.00348.x
+

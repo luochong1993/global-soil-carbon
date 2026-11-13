@@ -1,0 +1,21 @@
+{
+  "main_figures": 6,
+  "SI_figures": 29,
+  "main_files": [
+    "Fig1_inventory",
+    "Fig2_associations",
+    "Fig3_equilibrium_geography",
+    "Fig4_kinetic_stock_change",
+    "Fig5_nitrogen",
+    "Fig6_organic_fractions"
+  ],
+  "source_numbers": "packaged original v14 ensemble_v10.json and fig_numbers_v14_45.json",
+  "unchanged_scientific_caveats": [
+    "association not causation",
+    "tau assumptions",
+    "stock change not atmospheric flux",
+    "N and climate not combined"
+  ],
+  "main_docx": "/workspace/soil_global/paper/manuscript_v18_v14style_Science.docx",
+  "SM_docx": "/workspace/soil_global/paper/SM_v18_v14style_Science.docx"
+}

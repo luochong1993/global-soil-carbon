@@ -1,0 +1,572 @@
+{
+  "embedded_main_figures": 6,
+  "embedded_SI_figures": 29,
+  "main_table_count": 2,
+  "SI_table_count_including_continuations": 24,
+  "main_caption_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "SI_caption_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "table_caption_numbers_main": [
+    1,
+    2
+  ],
+  "table_caption_numbers_SI": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "unresolved_tokens": [],
+  "invalid_main_figure_refs": [],
+  "invalid_main_table_refs": [],
+  "invalid_SI_refs": [],
+  "missing_referenced_SI_figures": [],
+  "missing_referenced_SI_tables": [],
+  "latest_main_images_embedded": true,
+  "pngs": [
+    {
+      "file": "figs/v17_from_v14_main/Fig1_inventory.png",
+      "pixels": [
+        5037,
+        3930
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_main/Fig2_associations.png",
+      "pixels": [
+        5051,
+        3744
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_main/Fig3_equilibrium_geography.png",
+      "pixels": [
+        5042,
+        3539
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_main/Fig4_kinetic_stock_change.png",
+      "pixels": [
+        5103,
+        2399
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_main/Fig5_nitrogen.png",
+      "pixels": [
+        4938,
+        3556
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_main/Fig6_organic_fractions.png",
+      "pixels": [
+        4950,
+        3846
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS10_PDP_thresholds.png",
+      "pixels": [
+        4332,
+        2994
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS11_v14_drivers.png",
+      "pixels": [
+        4550,
+        3985
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS12_path_analysis.png",
+      "pixels": [
+        2445,
+        1606
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS13_pH_SIC_curve.png",
+      "pixels": [
+        3707,
+        1610
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS14_SHAP_dependence.png",
+      "pixels": [
+        4314,
+        2269
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS15_SSP_dTC_agreement.png",
+      "pixels": [
+        4594,
+        3799
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS16_per_GCM_spread.png",
+      "pixels": [
+        3765,
+        2780
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS17_v14_tradeoffs.png",
+      "pixels": [
+        4341,
+        3150
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS18_koppen_transitions.png",
+      "pixels": [
+        4421,
+        3736
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS19_equilibrium_vs_time_limited.png",
+      "pixels": [
+        3765,
+        1650
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS1_training_coverage.png",
+      "pixels": [
+        4440,
+        3136
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS20_v14_nitrogen.png",
+      "pixels": [
+        4555,
+        3356
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS21_fraction_data.png",
+      "pixels": [
+        4353,
+        1817
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS22_v14_fractions.png",
+      "pixels": [
+        4528,
+        4028
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS23_tau_sensitivity.png",
+      "pixels": [
+        3765,
+        1510
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS24_v14_inventory.png",
+      "pixels": [
+        4554,
+        3601
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS25_v14_equilibrium.png",
+      "pixels": [
+        4536,
+        3818
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS26_uncertainty_maps.png",
+      "pixels": [
+        4528,
+        2860
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS27_dominant_driver_pH_SIC.png",
+      "pixels": [
+        4528,
+        1486
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS28_deep_layers.png",
+      "pixels": [
+        4528,
+        2402
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS29_MAOC_uncertainty_subsoil.png",
+      "pixels": [
+        4558,
+        880
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS2_random_CV.png",
+      "pixels": [
+        3697,
+        1610
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS3_present_uncertainty.png",
+      "pixels": [
+        3753,
+        1619
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS4_depth_by_continent.png",
+      "pixels": [
+        4421,
+        2774
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS5_latitude_profiles.png",
+      "pixels": [
+        4331,
+        1763
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS6_koppen_stocks.png",
+      "pixels": [
+        4451,
+        3535
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS7_v14_countries.png",
+      "pixels": [
+        4381,
+        3830
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS8_30arcsec_zoom.png",
+      "pixels": [
+        3932,
+        2754
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "file": "figs/v17_from_v14_SI/FigS9_SHAP_top_features.png",
+      "pixels": [
+        4284,
+        1546
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ]
+    }
+  ],
+  "all_output_pngs_600dpi": true,
+  "changed_v14_files": [],
+  "preserved_v14_file_count": 130,
+  "retained_main_numeric_sentinels": {
+    "4105": true,
+    "2506": true,
+    "1598": true,
+    "378": true,
+    "229": true,
+    "150": true,
+    "188": true,
+    "180": true,
+    "518": true,
+    "183": true,
+    "78": true,
+    "37": true,
+    "39": true,
+    "6.9": true,
+    "34": true
+  },
+  "forbidden_claims_present": [],
+  "word_counts": {
+    "main_body_with_headings": 2167,
+    "v14_main_body_with_headings": 5182,
+    "abstract": 135,
+    "alternative_structured_abstract_not_in_Word": 224,
+    "methods_summary_prose": 465,
+    "legends": 686
+  },
+  "checks": {
+    "six_main_figures": true,
+    "29_SI_figures": true,
+    "two_main_tables": true,
+    "19_SI_tables": true,
+    "v14_unchanged": true,
+    "no_unresolved_ref_tokens": true,
+    "references_in_bounds": true,
+    "latest_main_images": true,
+    "600dpi_all_PNG": true,
+    "no_forbidden_joint_claims": true,
+    "first_citations_sequential": true
+  },
+  "first_citation_order": {
+    "SI_fig": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "SI_table": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "main_fig": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "main_table": [
+      1,
+      2
+    ]
+  }
+}

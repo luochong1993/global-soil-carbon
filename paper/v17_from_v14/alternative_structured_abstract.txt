@@ -1,0 +1,11 @@
+INTRODUCTION
+Organic and inorganic carbon occupy different depths and environments. Their joint soil-stock response, and the time over which it could emerge, cannot be inferred from either pool alone.
+
+RATIONALE
+We revisited a joint inventory and its existing climate, first-order turnover, nitrogen-acidification and organic-fraction outputs. Spatial associations are interpreted descriptively; separate experiments are not combined into a new scenario.
+
+RESULTS
+The upper 2 m stores 4105 Pg total carbon, including 2506 Pg SOC and 1598 Pg SIC; 89% of SIC is below 30 cm. The humidity–pH–SIC association is consistent with a proposed pathway, not proof of causation. Under SSP5-8.5, projected equilibrium changes are −378 Pg SOC and +229 Pg SIC, with ΔTC = −150 Pg; SOC decrease with SIC increase occurs on 50% of mapped land. Under the assumed turnover ranges, by-2100 changes are −188 Pg SOC, +7 Pg SIC and −180 Pg TC. Separate nitrogen experiments give topsoil SIC loss-only totals of 1.6–2.2 Pg over 2020–2050. For mineral topsoil fractions, equilibrium MAOC/POC decreases are 78/39 Pg, compared with 37/39 Pg by 2100. POC realizes most of its modeled committed decrease; the POC stock itself is not exhausted.
+
+CONCLUSION
+The central result is a conditional soil-stock decline whose magnitude and timing depend on which pools are included. It does not establish a net atmospheric CO₂ source or the sign of SIC change under joint climate and nitrogen forcing.

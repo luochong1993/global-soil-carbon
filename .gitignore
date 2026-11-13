@@ -1,0 +1,34 @@
+# data and model outputs (not in this repo)
+data/
+out/
+figs/
+*.tif
+*.tiff
+*.nc
+*.npz
+*.npy
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.csv
+*.parquet
+
+# manuscripts and binary figures
+*.docx
+*.doc
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.zip
+*.tar
+*.gz
+
+# python / os
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.env
+.venv/

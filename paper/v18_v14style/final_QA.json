@@ -1,0 +1,96 @@
+{
+  "source_v14_read_before_design": true,
+  "v17_read_for_comparison": true,
+  "full_page_QA": true,
+  "panel_QA_files": "/workspace/soil_global/paper/v18_v14style/panel_QA",
+  "figures": [
+    {
+      "figure": 1,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        5034
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 6,
+      "pdf_font_count": 23
+    },
+    {
+      "figure": 2,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        5584
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 8,
+      "pdf_font_count": 15
+    },
+    {
+      "figure": 3,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        5767
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 6,
+      "pdf_font_count": 22
+    },
+    {
+      "figure": 4,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        5250
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 6,
+      "pdf_font_count": 12
+    },
+    {
+      "figure": 5,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        4800
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 5,
+      "pdf_font_count": 14
+    },
+    {
+      "figure": 6,
+      "embedded_image_matches": true,
+      "px": [
+        5100,
+        5450
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "panels": 6,
+      "pdf_font_count": 19
+    }
+  ],
+  "main_figure_count": 6,
+  "main_panel_count": 37,
+  "unfinished": [],
+  "upload_performed": false
+}

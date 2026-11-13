@@ -1,0 +1,25 @@
+# Core mapping / ML / figures (analysis scripts)
+numpy
+pandas
+scipy
+scikit-learn
+xgboost
+shap
+rasterio
+rioxarray
+xarray
+netCDF4
+geopandas
+shapely
+pyproj
+matplotlib
+cartopy
+seaborn
+Pillow
+pyarrow
+
+# Manuscript builders (Word OMML equations)
+python-docx
+lxml
+pypandoc
+pymupdf

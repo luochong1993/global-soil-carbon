@@ -1,0 +1,26 @@
+{
+  "all_6_full_png_read": true,
+  "all_37_panels_read": true,
+  "contact_sheet_read": true,
+  "final_SM_S22_render_read": true,
+  "main_docx_embedded_sha_match": true,
+  "zip_sha_match": true,
+  "main_changed_paragraphs": [
+    14,
+    15,
+    17,
+    19,
+    21,
+    22,
+    29,
+    32,
+    33,
+    96,
+    99,
+    102,
+    105,
+    108,
+    111
+  ],
+  "unfinished": []
+}

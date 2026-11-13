@@ -1,0 +1,23 @@
+{
+  "python": "3.13.5",
+  "packages": {
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2",
+    "cartopy": "0.26.0",
+    "python-docx": "1.2.0",
+    "Pillow": "12.3.0",
+    "scipy": "1.18.1",
+    "rasterio": "1.5.1",
+    "geopandas": "1.1.4"
+  },
+  "figure_sources": [
+    "out/v10/ens_maps.npz",
+    "out/v10/ensemble_v10.json",
+    "out/v8/drivers_v8.json",
+    "out/v8/pdp.json",
+    "out/v8/obs_curves.json",
+    "out/v10/Nin_*_2020_2050.npz",
+    "out/v4/mask.npy"
+  ],
+  "source_baseline": "v14 only; no v15 or v16 imports"
+}
